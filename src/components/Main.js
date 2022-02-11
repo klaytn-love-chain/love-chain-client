@@ -20,13 +20,13 @@ function Main() {
 				<p>특별한 기념일에 연인과 함께<br/>러브체인 자물쇠를 걸어보세요!</p>
 			</div>
 			<Flex className={styles.feature} direction={['column', 'column', 'row']} padding={['0 10%', '0 15%', '0 20%']}>
-				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} >
+				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={[0, '10px']}>
 					<div className={styles.thumbnail}></div>
 					<p className={styles.text}>
 						러브체인 자물쇠를 구매하면,<br />Klaytn에 2명의 이름을 기록할 수 있습니다.
 					</p>
 				</Box>
-				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} >
+				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]}  margin={[0, '10px']} >
 					<div className={styles.thumbnail}></div>
 					<p className={styles.text}>
 						특별한 러브체인 자물쇠들은 추가적으로<br />
@@ -37,7 +37,7 @@ function Main() {
 						를 기록할 수 있습니다.<br />
 					</p>
 				</Box>
-				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]}  >
+				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={[0, '10px']} >
 					<div className={styles.thumbnail}></div>
 					<p className={styles.text}>
 						러브체인 자물쇠는 기록한 정보를 바탕으로 <br/>
