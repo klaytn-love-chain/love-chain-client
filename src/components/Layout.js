@@ -1,9 +1,11 @@
 import React from 'react';
-import styles from '../../styles/Layout.module.css'
+import Header from './Header';
+import styles from './Layout.module.scss';
 
-function Layout({children}) {
+function Layout({children, type}) {
 	return (
-		<div className={styles.layout}>
+		<div className={`${styles.layout} ${type === 'main' && styles.main}`}>
+			<Header />
 			{children}
 		</div>
 	);
