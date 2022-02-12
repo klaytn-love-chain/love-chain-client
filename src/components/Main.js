@@ -18,33 +18,36 @@ function Main() {
 				<div className={styles.stars3}></div>
 			</div>
 			<div className={styles.intro}>
-				<p>영원한 사랑의 약속,<br /> 러브체인에 기록해보세요! </p>
+				<p>영원한 사랑의 약속,<br/> 러브체인에 기록해보세요! </p>
 				<p>Klaytn 사랑의 자물쇠 NFT<br/>남산타워 스팟 한정판 500피스 오픈</p>
 				<p>특별한 기념일에 연인과 함께<br/>러브체인 자물쇠를 걸어보세요!</p>
 			</div>
 			<Flex className={styles.feature} direction={['column', 'column', 'row']} padding={['0 5%', '0 12%', '0 5%', '0 12%', '0 15%']}>
-				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={[0, '10px']}>
+				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
 					<div className={styles.thumbnail}></div>
 					<p className={styles.text}>
-						러브체인 자물쇠를 구매하면,<br />Klaytn에 2명의 이름을 기록할 수 있습니다.
+						러브체인 자물쇠를 구매하면,<br/>
+						Klaytn에 2명의 이름을<br/>
+						기록할 수 있습니다.
 					</p>
 				</Box>
-				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]}  margin={[0, '10px']} >
+				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
 					<div className={styles.thumbnail}></div>
 					<p className={styles.text}>
-						특별한 러브체인 자물쇠들은 추가적으로<br />
-						(1) 사랑을 시작한 날짜,<br />
-						(2) 커플을 소개할 수 있는 한 줄 문장,<br />
-						(3) 연인과의 사진,<br />
-						(4) 커플들의 소셜프로필 링크<br />
-						를 기록할 수 있습니다.<br />
+						특별한 러브체인 자물쇠들은 추가적으로<br/>
+						(1) 사랑을 시작한 날짜,<br/>
+						(2) 커플을 소개할 수 있는 한 줄 문장,<br/>
+						(3) 연인과의 사진,<br/>
+						(4) 커플들의 소셜프로필 링크<br/>
+						를 기록할 수 있습니다.<br/>
 					</p>
 				</Box>
-				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={[0, '10px']} >
+				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
 					<div className={styles.thumbnail}></div>
 					<p className={styles.text}>
-						러브체인 자물쇠는 기록한 정보를 바탕으로 <br/>
-						마이크로사이트를 제공합니다.<br />
+						러브체인 자물쇠는<br/>
+						기록한 정보를 바탕으로<br/>
+						마이크로사이트를 제공합니다.<br/>
 						(이미지 다운로드, 소셜미디어 공유)
 					</p>
 				</Box>
@@ -64,16 +67,19 @@ function Main() {
 						disableOnInteraction: false,
 					}}
 					breakpoints={{
-          640: {
+					320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          768: {
             slidesPerView: 1,
             spaceBetween: 20,
           },
-          768: {
+          960: {
             slidesPerView: 3,
             spaceBetween: 40,
           },
         }}
-					Autoplay={true}
 				>
 					<SwiperSlide className={styles.slide}>
 						<div className={styles.item}></div>
