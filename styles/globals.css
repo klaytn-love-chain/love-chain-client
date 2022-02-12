@@ -23,7 +23,7 @@ button {
 
 .swiper {
   overflow: visible !important;
-  z-index: -1;
+  z-index: -1 !important;
 }
 .swiper-button-next:after,
 .swiper-button-prev:after {
