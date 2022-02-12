@@ -11,3 +11,11 @@
 	background: linear-gradient(180deg, rgba(124,51,231,1) 0%, rgba(188,23,249,1) 33%, rgba(255,255,255,0) 100%);
 	overflow: hidden;
 }
+
+.microsite {
+	background: linear-gradient(180deg, #FA8474 0%, #C263FE 29.69%, #FFC44C 58.85%);
+	min-height: 100vh;
+	.container {
+		padding: 0;
+	}
+}

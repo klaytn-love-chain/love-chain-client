@@ -1,0 +1,54 @@
+.container {
+	max-width: 510px;
+	margin: 0 auto;
+	// border: 1px solid #fff;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
+.lock_image {
+	width: 80%;
+}
+
+.profile {
+	display: flex;
+	position: relative;
+	height: 40px;
+}
+
+.profile_one {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	position:relative;
+	top:-130px;
+	left: -40px;
+}
+
+.profile_two {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	position:relative;
+	top:-130px;
+	right: -40px;
+}
+
+.couple_name {
+	position:relative;
+	font-size: 48px;
+	color: #fff;
+}
+
+.date {
+	margin-top: 40px;
+	width: 80%;
+	padding:30px;
+	border-radius: 80px;
+	background-color: #fff;
+	color: #CB4FFE;
+	font-size: 36px;
+}
