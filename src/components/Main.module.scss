@@ -8,6 +8,11 @@
 	}
 }
 
+.effect {
+  position: relative;
+	z-index: 1000;
+}
+
 .stars {
   width: 1px;
   height: 1px;
@@ -108,6 +113,8 @@
 	flex-direction: column;
 	.item {
 		background-color: #7c33e7;
+		color:#fff;
+		padding: 10px;
 		width: 100%;
 		padding-top: 300px;
 		opacity: 0.5;

@@ -12,7 +12,7 @@ function Main() {
 			<div className={styles.hero}>
 				<img className={styles.logo} src="/images/logo_main.png" alt="love-chain" />
 			</div>
-			<div>
+			<div className={styles.effect}>
 				<div className={styles.stars}></div>
 				<div className={styles.stars2}></div>
 				<div className={styles.stars3}></div>
@@ -82,24 +82,19 @@ function Main() {
         }}
 				>
 					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}></div>
-						1위
+						<div className={styles.item}>1위</div>
 					</SwiperSlide>
 					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}></div>
-						2위
+						<div className={styles.item}>2위</div>
 					</SwiperSlide>
 					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}></div>
-						3위
+						<div className={styles.item}>3위</div>
 					</SwiperSlide>
 					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}></div>
-						4위
+						<div className={styles.item}>4위</div>
 					</SwiperSlide>
 					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}></div>
-						5위
+						<div className={styles.item}>5위</div>
 					</SwiperSlide>
 				</Swiper>
 			</div>
