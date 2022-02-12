@@ -50,7 +50,7 @@ function Main() {
 				</Box>
 			</Flex>
 			<div className={styles.trending}>
-				<Heading mt="80px" mb="20px">
+				<Heading mt="80px" mb="20px" color="#7c33e7">
 					LOCK TRENDS
 				</Heading>
 				<Swiper
