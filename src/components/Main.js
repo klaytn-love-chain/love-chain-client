@@ -1,7 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
+import Link from 'next/link'
 import styles from './Main.module.scss';
-import { Flex, Box } from '@chakra-ui/react'
+import { Flex, Box, Heading, Button } from '@chakra-ui/react';
+import { Navigation, Scrollbar, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 function Main() {
 	return (
@@ -19,7 +22,7 @@ function Main() {
 				<p>Klaytn 사랑의 자물쇠 NFT<br/>남산타워 스팟 한정판 500피스 오픈</p>
 				<p>특별한 기념일에 연인과 함께<br/>러브체인 자물쇠를 걸어보세요!</p>
 			</div>
-			<Flex className={styles.feature} direction={['column', 'column', 'row']} padding={['0 10%', '0 15%', '0 20%']}>
+			<Flex className={styles.feature} direction={['column', 'column', 'row']} padding={['0 5%', '0 12%', '0 5%', '0 12%', '0 15%']}>
 				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={[0, '10px']}>
 					<div className={styles.thumbnail}></div>
 					<p className={styles.text}>
@@ -46,6 +49,63 @@ function Main() {
 					</p>
 				</Box>
 			</Flex>
+			<div className={styles.trending}>
+				<Heading mt="80px" mb="20px">
+					LOCK TRENDS
+				</Heading>
+				<Swiper
+					modules={[Navigation, Scrollbar, Autoplay]}
+					spaceBetween={50}
+					navigation
+					scrollbar={{ draggable: true }}
+					loop={true}
+					autoplay={{
+						delay: 2500,
+						disableOnInteraction: false,
+					}}
+					breakpoints={{
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+        }}
+					Autoplay={true}
+				>
+					<SwiperSlide className={styles.slide}>
+						<div className={styles.item}></div>
+						1위
+					</SwiperSlide>
+					<SwiperSlide className={styles.slide}>
+						<div className={styles.item}></div>
+						2위
+					</SwiperSlide>
+					<SwiperSlide className={styles.slide}>
+						<div className={styles.item}></div>
+						3위
+					</SwiperSlide>
+					<SwiperSlide className={styles.slide}>
+						<div className={styles.item}></div>
+						4위
+					</SwiperSlide>
+					<SwiperSlide className={styles.slide}>
+						<div className={styles.item}></div>
+						5위
+					</SwiperSlide>
+				</Swiper>
+			</div>
+			<div className={styles.market}>
+				<Link href="/item">
+					<a>
+						<Button bgColor='#7c33e7' size='lg' color='#fff'>
+							러브체인 자물쇠 구매하기
+						</Button>
+					</a>
+				</Link>
+			</div>
 		</>
 	)
 }

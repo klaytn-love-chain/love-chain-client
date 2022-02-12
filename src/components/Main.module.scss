@@ -1,7 +1,7 @@
 .hero {
 	display: flex;
 	justify-content: center;
-	padding: 120px 4% 40px;
+	padding: 30px 4% 40px;
 	.logo {
 		width: 80%;
 		max-width: 500px;
@@ -95,3 +95,26 @@
 		margin-top:20px;
 	}
 }
+
+.trending {
+	width: 80%;
+	margin: 0 auto;
+}
+.slide {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	.item {
+		background-color: #7c33e7;
+		width: 100%;
+		padding-top: 300px;
+	}
+}
+
+.market  {
+  margin-top: 200px;
+	margin-bottom: 200px;
+}
+

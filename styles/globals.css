@@ -16,3 +16,12 @@ a {
 * {
   box-sizing: border-box;
 }
+
+button {
+  cursor: pointer;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  color: #7c33e7;
+}

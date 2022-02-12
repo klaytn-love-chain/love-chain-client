@@ -6,7 +6,9 @@ function Layout({children, type}) {
 	return (
 		<div className={`${styles.layout} ${type === 'main' && styles.main}`}>
 			<Header />
-			{children}
+			<div className={styles.container}>
+				{children}
+			</div>
 		</div>
 	);
 }

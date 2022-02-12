@@ -1,13 +1,26 @@
 import '../styles/globals.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from "@chakra-ui/react"
+import { createBreakpoints } from '@chakra-ui/theme-tools'
 import { Global } from '@emotion/react'
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/autoplay';
+
+const breakpoints = createBreakpoints({
+  sm: '320px',
+  md: '768px',
+  lg: '960px',
+  xl: '1200px',
+  '2xl': '1536px',
+})
 
 const theme = extendTheme({
   fonts: {
     heading: 'LeferiBaseType-BoldA',
     body: 'LeferiBaseType-RegularA'
-,  }
+  },
+  breakpoints,
 });
 
 function MyApp({ Component, pageProps }) {
@@ -29,7 +42,7 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-    <ChakraProvider theme={theme}>
+      <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
     </>
