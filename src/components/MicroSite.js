@@ -22,33 +22,33 @@ function MicroSite() {
 				if (!window.Kakao.isInitialized()) {
 						// 두번째 step 에서 가져온 javascript key 를 이용하여 initialize
 					window.Kakao.init(KAKAO_JS_KEY);
-					window.Kakao.Link.sendDefault({
-						objectType: "feed",
-							content: {
-								title: '영원한 사랑의 약속, 러브체인',
-								description: "",
-								imageUrl: "https://love-chain.vercel.app/images/sample-lock.png",
-								link: {
-									mobileWebUrl: SHARE_URL,
-									androidExecParams: "test",
-								},
-							},
-							buttons: [
-								{
-									title: "웹으로 이동",
-									link: {
-										mobileWebUrl: SHARE_URL,
-									},
-								},
-							],
-					});
 				}
 		}
 	}, [SHARE_URL, status]);
 
 	const handleKakaoButton = () => {
-		window.Kakao.Link.sendScrap({
-				requestUrl: SHARE_URL,
+		//window.Kakao.Link.sendScrap({
+		//		requestUrl: SHARE_URL,
+		//});
+		window.Kakao.Link.sendDefault({
+			objectType: "feed",
+				content: {
+					title: '영원한 사랑의 약속, 러브체인',
+					description: "",
+					imageUrl: "https://love-chain.vercel.app/images/sample-lock.png",
+					link: {
+						mobileWebUrl: SHARE_URL,
+						androidExecParams: "test",
+					},
+				},
+				buttons: [
+					{
+						title: "웹으로 이동",
+						link: {
+							mobileWebUrl: SHARE_URL,
+						},
+					},
+				],
 		});
 };
 
