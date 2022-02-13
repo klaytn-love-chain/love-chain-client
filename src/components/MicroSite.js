@@ -14,7 +14,7 @@ function MicroSite() {
 	const now = dayjs();
 	const coupleDate = dayjs(data.options.date);
 	const status = useScript("https://developers.kakao.com/sdk/js/kakao.js");
-	const SHARE_URL = `${DOMAIN_URL}/${tokenId}`;
+	const SHARE_URL = `${DOMAIN_URL}/site/${tokenId}`;
 
 	useEffect(() => {
 		if (status === "ready" && window.Kakao) {
@@ -26,7 +26,7 @@ function MicroSite() {
 						objectType: "feed",
 							content: {
 								title: '영원한 사랑의 약속, 러브체인',
-								description: "내용!",
+								description: "",
 								imageUrl: "https://love-chain.vercel.app/images/sample-lock.png",
 								link: {
 									mobileWebUrl: SHARE_URL,
