@@ -1,15 +1,13 @@
 import React from 'react';
-import Layout from '../../src/components/Layout'
-import { Heading } from '@chakra-ui/react'
+import Layout from '../../src/components/Layout';
+import Login from '../../src/components/Login';
 
 export default function LoginPage() {
   return (
     <>
       <Layout>
-        <Heading>로그인 페이지</Heading>
+        <Login />
       </Layout>
     </>
-  )
+  );
 }
-
-
