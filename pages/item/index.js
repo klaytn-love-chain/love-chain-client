@@ -5,11 +5,10 @@ import LockCard from '../../src/components/LockCard'
 import FilterToggle from '../../src/components/FilterToggle'
 import FilterResult from '../../src/components/FilterResult'
 import styled from 'styled-components';
-import { 
-  Button, 
-  ButtonGroup,
-  HStack, 
-  Text, 
+import {
+  Button,
+  HStack,
+  Text,
   Spinner,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -21,7 +20,7 @@ export default function ItemListPage() {
   const [loading, setLoading] = useState(false)
   // 무한스크롤링 페이지
   const [page, setPage] = useState(1)
-  
+
   // Filter Toggle
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
@@ -37,8 +36,8 @@ export default function ItemListPage() {
         socialProfile: false,
         isAvailable: false,
     })
-    
-  // optionData에 따른 url 변경 적용 
+
+  // optionData에 따른 url 변경 적용
   const url = `https://hohyeon.site/api/item?${optionData.date ? 'date=true' : ''}${optionData.oneLine ? '&oneLine=true' : ''}${optionData.coupleImage ? '&coupleImage=true' : ''}${optionData.socialProfile ? '&socialProfile=true' : ''}${optionData.isAvailable ? '&isAvailable=true' : ''}${optionData.price.order == 'desc' ? '&price=desc' : '&price=asc'}&limit=${10 * page}&offset=0`;
 
   const fetchLockDataOf = async () => {
@@ -74,9 +73,9 @@ export default function ItemListPage() {
               <Text size='lg' style={{ display: 'inline' }}>
                 {lockTotal}개의 자물쇠가 검색되었습니다.
               </Text>
-              <Button 
-                colorScheme='purple' 
-                size='sm' 
+              <Button
+                colorScheme='purple'
+                size='sm'
                 style={{ display: 'inline' }}
                 ref={btnRef}
                 onClick={onOpen}
@@ -91,11 +90,11 @@ export default function ItemListPage() {
           </OptionPanel>
 
           {/* 카드 배열 */}
-          <LockCard 
+          <LockCard
             page={page}
             setPage={setPage}
-            option={optionData} 
-            lockList={lockData.list} 
+            option={optionData}
+            lockList={lockData.list}
             fetchLockDataOf={fetchLockDataOf}
           />
           {/* lockData &&  <LockCard list={lockData.list} /> */}
