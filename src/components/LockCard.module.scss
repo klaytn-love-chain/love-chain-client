@@ -1,7 +1,8 @@
 .cardContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin: 1rem;
+    margin: 2rem;
+    padding-top: 150px;
 }
 
 .card {
@@ -11,11 +12,11 @@
     margin: 1rem;
     cursor: pointer;
     transition: 0.4s;
-    z-index: 10000;
 }
 
 .card:hover {
     transform: scale(1.05);
+    background-color: rgb(124,51,231,0.25);
     padding: 0.5rem;
 }
 
