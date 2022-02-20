@@ -12,7 +12,8 @@ import {
   Text, 
   Spinner,
   useDisclosure,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import { getItems } from '../../src/constant/api';
 
 export default function ItemListPage() {
   const [lockData, setLockData] = useState(null)
@@ -41,6 +42,8 @@ export default function ItemListPage() {
   const url = `https://hohyeon.site/api/item?${optionData.date ? 'date=true' : ''}${optionData.oneLine ? '&oneLine=true' : ''}${optionData.coupleImage ? '&coupleImage=true' : ''}${optionData.socialProfile ? '&socialProfile=true' : ''}${optionData.isAvailable ? '&isAvailable=true' : ''}${optionData.price.order == 'desc' ? '&price=desc' : '&price=asc'}&limit=${10 * page}&offset=0`;
 
   const fetchLockDataOf = async () => {
+
+    // const data = await getItems();
     try {
       console.log('page', page)
       console.log('url', url)
@@ -95,11 +98,12 @@ export default function ItemListPage() {
             lockList={lockData.list} 
             fetchLockDataOf={fetchLockDataOf}
           />
+          {/* lockData &&  <LockCard list={lockData.list} /> */}
         </Layout>
       )}
 
       {/* 필터 토글 */}
-      <FilterToggle 
+      <FilterToggle
         btnRef={btnRef}
         isOpen={isOpen}
         onOpen={onOpen}
@@ -109,7 +113,7 @@ export default function ItemListPage() {
         lockTotal={lockTotal}
         setLockTotal={setLockTotal}
       />
-      
+
     </>
   )
 }

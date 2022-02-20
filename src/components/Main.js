@@ -1,12 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
 import styles from './Main.module.scss';
 import { Flex, Box, Heading, Button } from '@chakra-ui/react';
 import { Navigation, Scrollbar, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { getItems } from '../constant/api';
 
 function Main() {
+	const [lockList, setLockList] = useState([]);
+
+	const getTrendLocks = async() => {
+		const data = await getItems({
+			limit: 5
+		});
+		setLockList(data.list);
+	}
+
+	useEffect(() => {
+		getTrendLocks();
+	}, []);
+
 	return (
 		<>
 			<div className={styles.hero}>
@@ -81,21 +95,27 @@ function Main() {
           },
         }}
 				>
-					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}>1위</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}>2위</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}>3위</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}>4위</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles.slide}>
-						<div className={styles.item}>5위</div>
-					</SwiperSlide>
+				{
+					lockList.map((item, index) => {
+					return (
+						<SwiperSlide
+							key={index}
+							className={styles.slide}>
+							<div className={styles.item}>
+								<div className={styles.rank}>
+									<div className={styles.number}>
+										{index + 1}위
+									</div>
+									<div className={styles.price}>
+										{item.price} Klay
+									</div>
+								</div>
+								<img src={item.lockImage} alt='trend locks' />
+							</div>
+						</SwiperSlide>
+					)
+				})
+				}
 				</Swiper>
 			</div>
 			<div className={styles.market}>

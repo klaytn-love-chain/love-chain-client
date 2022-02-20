@@ -111,13 +111,31 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	position: relative;
+	.rank {
+		position: absolute;
+		display:flex;
+		flex-direction:row;
+		background-color: #fff;
+		top: 20px;
+		left: 30px;
+		font-size: 20px;
+		font-weight: bold;
+		.number {
+			padding: 10px;
+		}
+		.price {
+			padding: 10px;
+			background-color: #7c33e7;
+			color: #fff;
+		}
+	}
 	.item {
-		background-color: #7c33e7;
-		color:#fff;
+		display: flex;
+		justify-content: center;
+		color: #7c33e7;
 		padding: 10px;
 		width: 100%;
-		padding-top: 300px;
-		opacity: 0.5;
 		border-radius: 20px;
 	}
 }
