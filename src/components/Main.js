@@ -104,7 +104,7 @@ function Main() {
 							<div className={styles.item}>
 								<div className={styles.rank}>
 									<div className={styles.number}>
-										{index}위
+										{index + 1}위
 									</div>
 									<div className={styles.price}>
 										{item.price} Klay
