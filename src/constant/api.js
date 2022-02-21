@@ -38,7 +38,7 @@ export const deleteItemUserInfo = async (tokenId) => {
 };
 
 export const getUserItems = async (userAddress) => {
-  const { data } = await axios.get(`${API_DOMAIN}/item/${userAddress}/info`);
+  const { data } = await axios.get(`${API_DOMAIN}/item/user/${userAddress}`);
   return data;
 };
 

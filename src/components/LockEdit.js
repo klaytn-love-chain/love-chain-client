@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import Image from 'next/image';
 import styles from './LockEdit.module.scss';
 import {
 	Box,
@@ -17,7 +18,9 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 
-function LockEdit() {
+function LockEdit({ lock }) {
+	const [lockData, setLockData] = useState(lock);
+
 	const [person1Name, setPeson1Name] = useState('');
 	const [person2Name, setPeson2Name] = useState('');
 
@@ -60,6 +63,20 @@ function LockEdit() {
 
 	return (
 		<div className={styles.container}>
+			<div>
+			{
+				lockData && (
+					<Image
+						width={200}
+						height={200}
+						src={lockData.lockImage}
+						alt={`${lockData.tokenId} 자물쇠 이미지`}
+						quality={100}
+					/>
+				)
+			}
+			</div>
+
 			<Tabs size='lg' variant='enclosed' isFitted  colorScheme="purple">
 				<TabList>
 					<Tab>커플이름 수정</Tab>

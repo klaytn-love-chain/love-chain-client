@@ -3,13 +3,13 @@ import { createContext, useContext, useReducer } from 'react';
 const initialState = {
   isLoggedIn: false,
   userAddress: '',
-  request_key: '',
+  requestKey: '',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return { ...state, isLoggedIn: true, userAddress: action.userAddress, request_key: action.request_key };
+      return { ...state, isLoggedIn: true, userAddress: action.userAddress, requestKey: action.request_key };
     case 'LOGOUT':
       return { ...initialState };
     default:
