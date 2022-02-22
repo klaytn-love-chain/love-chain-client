@@ -38,6 +38,7 @@ export const deleteItemUserInfo = async (tokenId) => {
 };
 
 export const getUserItems = async (userAddress) => {
+
   const { data } = await axios.get(`${API_DOMAIN}/item/user/${userAddress}`);
   return data;
 };
@@ -54,3 +55,4 @@ export const postUser = async (address, request_key) => {
   });
   return data;
 };
+

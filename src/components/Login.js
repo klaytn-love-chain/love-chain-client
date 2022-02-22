@@ -50,12 +50,14 @@ function Login() {
   const [qrvalue, setQrvalue] = useState('DEFAULT');
 
   useEffect(() => {
+
     getAddress(setQrvalue, async (address, request_key) => {
       const { ok, msg } = await postUser(address, request_key);
 
       if (ok) userDispatch({ type: 'LOGIN', userAddress: address, request_key });
       else alert(msg);
       Router.replace('/');
+
     });
   }, []);
 

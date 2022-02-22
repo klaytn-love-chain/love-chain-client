@@ -1,7 +1,10 @@
+
 import React,{ useState, useEffect, useCallback } from 'react';
 import { useInView } from "react-intersection-observer"
+
 import styles from './LockCard.module.scss';
-import { Image, Text } from '@chakra-ui/react'
+import { Image, Text, Button } from '@chakra-ui/react'
+import Link from 'next/link';
 
 function LockCard({ page, setPage, optionData, lockList, scrolling }) {
     const [ref, inView] = useInView()
@@ -38,6 +41,21 @@ function LockCard({ page, setPage, optionData, lockList, scrolling }) {
             {lockList.map((item, idx) => {
                 const lastElement = lockList.length - 1
                 return (
+
+                // <div key={item.tokenId} className={styles.card}>
+                //         <Image src={item.lockImage} />
+                //         <br />
+                //         <Text className={styles.tokenId}>
+                //             No. {item.tokenId}
+                //         </Text>
+                //         <Text className={styles.price}>
+                //             {item.price} KLAY
+                //         </Text>
+                //         <Link href={`/item/${item.tokenId}`}>
+                //             <Button> 자세히 </Button>
+                //         </Link>
+                // </div>
+
                     <div key={idx} className={styles.card}>
                         <div ref={(idx == lastElement ? ref : null)}>
                             <Image src={item.lockImage} alt={'lockImage'} style={{ borderRadius: '1rem' }}/>
@@ -50,8 +68,12 @@ function LockCard({ page, setPage, optionData, lockList, scrolling }) {
                             <Text> oneLine : {true_or_false(item.feature.oneLine)}</Text>
                             <Text> socialProfile : {true_or_false(item.feature.socialProfile)}</Text>
                             <Text> isAvailable : {true_or_false(item.isAvailable)}</Text>
+                            <Link href={`/item/${item.tokenId}`}>
+                                <Button> 자세히 </Button>
+                             </Link>
                         </div>
                     </div>
+
                 )
             })}
         </div>
