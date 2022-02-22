@@ -61,6 +61,17 @@ function MyLockList({ list }) {
 											</Button>
 										</a>
 									</Link>
+									<Link href={`/site/${item.tokenId}`}>
+										<a>
+											<Button
+												mt="2"
+												isFullWidth
+												colorScheme="purple"
+											>
+												미니사이트로 이동하기
+											</Button>
+										</a>
+									</Link>
 									<Button
 										mt="2"
 										isFullWidth
