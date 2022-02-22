@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer"
 
 import styles from './LockCard.module.scss';
 import { Image, Text, Button } from '@chakra-ui/react'
+import Link from 'next/link';
 
 function LockCard({ page, setPage, optionData, lockList, scrolling }) {
     const [ref, inView] = useInView()
