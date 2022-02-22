@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './LockEdit.module.scss';
