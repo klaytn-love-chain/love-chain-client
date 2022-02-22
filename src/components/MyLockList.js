@@ -108,7 +108,7 @@ function MyLockList({ list }) {
 									type='text'
 									placeholder='마켓에 판매하고자 하는 가격을 적어주세요.'
 								/>
-								<InputRightAddon children='klay' />
+								<InputRightAddon children='Klay' />
 							</InputGroup>
 						</FormControl>
 					</ModalBody>
