@@ -15,11 +15,12 @@ import {
 import { getItems } from '../../src/constant/api';
 
 export default function ItemListPage() {
+  const [loading, setLoading] = useState(false)
   const [lockData, setLockData] = useState({
     list : [], 
     total: 0
   })
-  const [loading, setLoading] = useState(false)
+
   // 무한스크롤링 기능
   const [page, setPage] = useState(0)
   const [scrolling, setScrolling] = useState(false)
@@ -81,9 +82,9 @@ export default function ItemListPage() {
               <Text size='lg' style={{ display: 'inline' }}>
                 {lockData.total}개의 자물쇠가 검색되었습니다.
               </Text>
-              <Button 
-                colorScheme='purple' 
-                size='sm' 
+              <Button
+                colorScheme='purple'
+                size='sm'
                 style={{ display: 'inline' }}
                 ref={btnRef}
                 onClick={onOpen}
@@ -98,14 +99,13 @@ export default function ItemListPage() {
           </OptionPanel>
 
           {/* 카드 배열 */}
-          <LockCard 
+          <LockCard
             page={page}
             setPage={setPage}
             scrolling={scrolling}
             optionData={optionData} 
             lockList={lockData.list} 
           />
-          {/* lockData &&  <LockCard list={lockData.list} /> */}
         </Layout>
       )}
 

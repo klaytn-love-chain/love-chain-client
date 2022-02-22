@@ -21,6 +21,12 @@ const theme = extendTheme({
     heading: 'LeferiBaseType-BoldA',
     body: 'LeferiBaseType-RegularA',
   },
+  colors: {
+    purple: {
+      600: "#7c33e7",
+      500: "#7c33e7",
+    },
+  },
   breakpoints,
 });
 
