@@ -289,8 +289,8 @@ function LockEdit({ lock }) {
 							</FormControl>
 						<Button
 							isFullWidth
-							onClick={handleDetailSubmit}
 							colorScheme="purple"
+							onClick={handleDetailSubmit}
 						>
 							수정하기
 						</Button>
