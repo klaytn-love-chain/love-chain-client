@@ -49,9 +49,9 @@ function Main() {
 					<div className={styles.thumbnail}></div>
 					<p className={styles.text}>
 						특별한 러브체인 자물쇠들은 추가적으로<br/>
-						(1) 사랑을 시작한 날짜,<br/>
+						(1) 사귀기 시작한 날짜,<br/>
 						(2) 커플을 소개할 수 있는 한 줄 문장,<br/>
-						(3) 연인과의 사진,<br/>
+						(3) 연인과 찍은 사진,<br/>
 						(4) 커플들의 소셜프로필 링크<br/>
 						를 기록할 수 있습니다.<br/>
 					</p>
@@ -61,8 +61,7 @@ function Main() {
 					<p className={styles.text}>
 						러브체인 자물쇠는<br/>
 						기록한 정보를 바탕으로<br/>
-						마이크로사이트를 제공합니다.<br/>
-						(이미지 다운로드, 소셜미디어 공유)
+						공유 가능한 미니사이트를 제공합니다.
 					</p>
 				</Box>
 			</Flex>
