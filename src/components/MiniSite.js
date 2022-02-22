@@ -2,13 +2,13 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styles from './MicroSite.module.scss';
+import styles from './MiniSite.module.scss';
 import { LOCK_OWNER_INFO as data, DOMAIN_URL, KAKAO_JS_KEY } from '../constant';
 import dayjs from 'dayjs';
 import { Button, Image } from '@chakra-ui/react';
 import { useScript } from "../hooks/useScript";
 
-function MicroSite() {
+function MiniSite() {
 	const router = useRouter();
   const { tokenId } = router.query;
 	const now = dayjs();
@@ -78,5 +78,5 @@ function MicroSite() {
 	);
 }
 
-export default MicroSite;
+export default MiniSite;
 

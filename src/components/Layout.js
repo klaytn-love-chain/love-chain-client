@@ -8,9 +8,9 @@ function Layout({ children, type }) {
       className={`
 			${styles.layout}
 			${type === 'main' && styles.main}
-			${type === 'microsite' && styles.microsite}`}
+			${type === 'minisite' && styles.minisite}`}
     >
-      {type !== 'microsite' && <Header />}
+      {type !== 'minisite' && <Header />}
       <div className={styles.container}>{children}</div>
     </div>
   );
