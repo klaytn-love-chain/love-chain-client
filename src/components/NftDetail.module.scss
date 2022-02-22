@@ -1,0 +1,19 @@
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    margin: 1rem;
+}
+
+.card {
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    padding: 0.5rem;
+}

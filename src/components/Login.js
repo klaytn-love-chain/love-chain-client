@@ -58,7 +58,7 @@ function Login() {
   useEffect(() => {
     getAddress(setQrvalue, (address) => {
       userDispatch({ type: 'LOGIN', userAddress: address });
-      Router.replace('/');
+      Router.replace('/my');
     });
   }, []);
 
