@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Layout from '../../src/components/Layout'
 import axios from 'axios';
 import LockCard from '../../src/components/LockCard'
@@ -6,8 +6,7 @@ import FilterToggle from '../../src/components/FilterToggle'
 import FilterResult from '../../src/components/FilterResult'
 import styled from 'styled-components';
 import { 
-  Button, 
-  ButtonGroup,
+  Button,
   HStack, 
   Text, 
   Spinner,
@@ -16,15 +15,19 @@ import {
 import { getItems } from '../../src/constant/api';
 
 export default function ItemListPage() {
-  const [lockData, setLockData] = useState(null)
-  const [lockTotal, setLockTotal] = useState(0)
+  const [lockData, setLockData] = useState({
+    list : [], 
+    total: 0
+  })
   const [loading, setLoading] = useState(false)
-  // 무한스크롤링 페이지
-  const [page, setPage] = useState(1)
+  // 무한스크롤링 기능
+  const [page, setPage] = useState(0)
+  const [scrolling, setScrolling] = useState(false)
   
   // Filter Toggle
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
+  const offsetNumber = 0 + (12 * page)
   const [optionData, setOptionData] = useState({
         price: {
           order : 'desc',
@@ -36,30 +39,34 @@ export default function ItemListPage() {
         oneLine: false,
         socialProfile: false,
         isAvailable: false,
+        offset: 0 + (12 * page)
     })
     
   // optionData에 따른 url 변경 적용 
-  const url = `https://hohyeon.site/api/item?${optionData.date ? 'date=true' : ''}${optionData.oneLine ? '&oneLine=true' : ''}${optionData.coupleImage ? '&coupleImage=true' : ''}${optionData.socialProfile ? '&socialProfile=true' : ''}${optionData.isAvailable ? '&isAvailable=true' : ''}${optionData.price.order == 'desc' ? '&price=desc' : '&price=asc'}&limit=${10 * page}&offset=0`;
-
-  const fetchLockDataOf = async () => {
-
-    // const data = await getItems();
-    try {
-      console.log('page', page)
-      console.log('url', url)
-      const { data } = await axios.get(url)
-      console.log(data)
-      setLockData(data)
-      setLockTotal(data.total)
-      setLoading(true)
-    } catch(err) {
-      console.log(err)
-    }
+  const url = `https://hohyeon.site/api/item?${optionData.date ? 'date=true' : ''}${optionData.oneLine ? '&oneLine=true' : ''}${optionData.coupleImage ? '&coupleImage=true' : ''}${optionData.socialProfile ? '&socialProfile=true' : ''}${optionData.isAvailable ? '&isAvailable=true' : ''}${optionData.price.order == 'desc' ? '&price=desc' : '&price=asc'}&limit=12&offset=${offsetNumber}`;
+  
+  // 무한스크롤링 기능
+  const getMoreItems = async() => {
+      setScrolling(true)
+      try {
+        const { data } = await axios.get(url)
+        setLockData(prevState => ({
+          list: [...prevState.list, ...data.list],
+          total: data.total
+        }))
+        console.log('url : ', url)
+        console.log('lockData : ', lockData)
+        setLoading(true)
+      } catch(err) {
+        console.log(err)
+      }
+      setScrolling(false)
   }
 
+  // page변할때마다 함수 불러오기
   useEffect(() => {
-    fetchLockDataOf()
-  },[optionData])
+    getMoreItems()
+  }, [page, optionData])
 
   return (
     <>
@@ -72,7 +79,7 @@ export default function ItemListPage() {
           <OptionPanel>
             <HStack spacing='3%' style={{ display: 'inline', margin: '0' }}>
               <Text size='lg' style={{ display: 'inline' }}>
-                {lockTotal}개의 자물쇠가 검색되었습니다.
+                {lockData.total}개의 자물쇠가 검색되었습니다.
               </Text>
               <Button 
                 colorScheme='purple' 
@@ -94,9 +101,9 @@ export default function ItemListPage() {
           <LockCard 
             page={page}
             setPage={setPage}
-            option={optionData} 
+            scrolling={scrolling}
+            optionData={optionData} 
             lockList={lockData.list} 
-            fetchLockDataOf={fetchLockDataOf}
           />
           {/* lockData &&  <LockCard list={lockData.list} /> */}
         </Layout>
@@ -108,10 +115,12 @@ export default function ItemListPage() {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
+        setPage={setPage}
         optionData={optionData}
         setOptionData={setOptionData}
-        lockTotal={lockTotal}
-        setLockTotal={setLockTotal}
+        lockData={lockData}
+        setLockData={setLockData}
+        getMoreItems={getMoreItems}
       />
 
     </>

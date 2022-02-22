@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './FilterToggle.module.scss';
 import styled from 'styled-components';
 import {
   Button,
   ButtonGroup,
   Drawer,
-  DrawerBody,
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
@@ -13,7 +12,18 @@ import {
   DrawerCloseButton,
 } from '@chakra-ui/react'
 
-function FilterToggle({ btnRef, isOpen, onOpen, onClose, optionData, setOptionData, lockTotal, setLockTotal }) {
+function FilterToggle({ 
+    btnRef, 
+    isOpen, 
+    onOpen, 
+    onClose, 
+    setPage, 
+    optionData, 
+    setOptionData, 
+    lockData, 
+    setLockData, 
+    getMoreItems 
+}) {
 
     const handleOptionClick = (e) => {
         const { name, value } = e.target
@@ -64,8 +74,21 @@ function FilterToggle({ btnRef, isOpen, onOpen, onClose, optionData, setOptionDa
                 coupleImage: false,
                 socialProfile: false,
             })
-            setLockTotal(0)
+            setLockData({
+                list : [],
+                total: 0
+            })
+            setPage(0)
         }
+    }
+
+    const showOptionList = () => {
+        setLockData({
+            list : [],
+            total: lockData.total
+        })
+        setPage(0)
+        getMoreItems()
     }
     
 	return (
@@ -128,28 +151,28 @@ function FilterToggle({ btnRef, isOpen, onOpen, onClose, optionData, setOptionDa
                                 onClick={handleOptionClick}
                                 style={{ marginLeft: '1.5rem' }}
                             >
-                                만난날짜 등록기능
+                                만난날짜 등록가능
                             </ButtonStyle>
                             <ButtonStyle 
                                 name='oneLine'
                                 value={optionData.oneLine}
                                 onClick={handleOptionClick}
                             >
-                                한줄문장 등록기능
+                                한줄문장 등록가능
                             </ButtonStyle>
                             <ButtonStyle 
                                 name='coupleImage'
                                 value={optionData.coupleImage}
                                 onClick={handleOptionClick}
                             >
-                                커플사진 등록기능
+                                커플사진 등록가능
                             </ButtonStyle>
                             <ButtonStyle 
                                 name='socialProfile'
                                 value={optionData.socialProfile}
                                 onClick={handleOptionClick}
                             >
-                                소셜프로필 등록기능
+                                소셜프로필 등록가능
                             </ButtonStyle>
                         </ButtonGroup>
                     </div>
@@ -171,7 +194,9 @@ function FilterToggle({ btnRef, isOpen, onOpen, onClose, optionData, setOptionDa
                             colorScheme='purple' 
                             onClick={onClose}
                         >
-                            {lockTotal}개 상품 보기
+                            <div onClick={showOptionList}>
+                                {lockData.total}개 상품 보기
+                            </div>
                         </Button>
                     </DrawerFooter>
                 </DrawerContent>
