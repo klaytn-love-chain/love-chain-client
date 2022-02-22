@@ -1,20 +1,16 @@
 
-// import React, { useState, useEffect, useRef } from 'react';
-// import Layout from '../../src/components/Layout';
-// import { getUserItems } from '../../src/constant/api';
-// import LockCard from '../../src/components/LockCard';
-// import {
-//   Button,
-//   HStack,
-//   Text,
-//   Spinner,
-//   useDisclosure,
-// } from '@chakra-ui/react';
+import React, { useState, useEffect, useRef } from 'react';
+import Layout from '../../src/components/Layout';
+import { getUserItems } from '../../src/constant/api';
+import LockCard from '../../src/components/LockCard';
+import {
+  Button,
+  HStack,
+  Text,
+  Spinner,
+  useDisclosure,
+} from '@chakra-ui/react';
 
-import React from 'react';
-import Link from 'next/link';
-import Layout from '../../src/components/Layout'
-import { Heading, Button } from '@chakra-ui/react'
 
 
 export default function MyPage() {
@@ -37,7 +33,6 @@ export default function MyPage() {
   }, [])
   return (
     <>
-{/* <<<<<<< HEAD
       {isLoading ? (
         <Layout>
           <Spinner />
@@ -61,15 +56,7 @@ export default function MyPage() {
             }
         </Layout>
       )}
-======= */}
-      <Layout>
-        <Heading>마이페이지</Heading>
-        <Link href="/item/1/edit">
-          <a>
-            <Button>수정하기</Button>
-          </a>
-        </Link>
-      </Layout>
+
 
     </>
   )
