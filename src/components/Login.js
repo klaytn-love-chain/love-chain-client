@@ -56,7 +56,7 @@ function Login() {
 
       if (ok) userDispatch({ type: 'LOGIN', userAddress: address, request_key });
       else alert(msg);
-      Router.replace('/');
+      Router.replace('/my');
 
     });
   }, []);
