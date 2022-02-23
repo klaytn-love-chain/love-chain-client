@@ -37,7 +37,7 @@ export const getItemUserInfo = async (tokenId) => {
 
 export const postItemUserInfo = async ({ tokenId, contents, userAddress, requestKey }) => {
 	const { data } = await axios.post(`${API_DOMAIN}/item/${tokenId}/info`,
-		{ data: contents },
+		{ ...contents },
 		{ params: {
 			address: userAddress,
 			request_key: requestKey,

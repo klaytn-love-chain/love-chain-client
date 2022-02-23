@@ -5,7 +5,10 @@ import { useRouter } from 'next/router';
 import styles from './MiniSite.module.scss';
 import { DOMAIN_URL, KAKAO_JS_KEY } from '../constant';
 import dayjs from 'dayjs';
-import { Button, Image } from '@chakra-ui/react';
+import {
+	Button, Image,
+	Alert, AlertIcon, AlertTitle, AlertDescription,
+} from '@chakra-ui/react';
 import { useScript } from "../hooks/useScript";
 import { getItemUserInfo } from '../constant/api';
 
@@ -66,29 +69,58 @@ function MiniSite() {
 };
 
 	return (
-		<div className={styles.container}>
-			<img className={styles.lock_image} src={info?.lockImage} alt="lock" />
-			<div className={styles.profile}>
-				{info?.profileImage?.oneImage && <img className={styles.profile_one} src={info?.profileImage?.oneImage} alt="profile image" />}
-				{info?.profileImage?.twoImage && <img className={styles.profile_two} src={info?.profileImage?.twoImage} alt="profile image" />}
-			</div>
-			<div className={styles.couple_name}>현아 💛️ 이던</div>
-			{info?.options.date && <div className={styles.text}>우리가 만난 지<br />{`${now.diff(dayjs(info?.options.date), 'day')}일..! 🥰`}</div>}
-			{info?.options.coupleImage && (
-			<div className={styles.couple_image}>
-				<img src={info?.options.coupleImage} alt="couple image" />
-			</div>)}
-			{info?.options.oneLine && <div className={styles.text}>{info?.options.oneLine}</div>}
-			<div className={styles.util}>
-				<Link href="/">
-					<a>
-						<Image src="/images/logo.svg" alt="love-chain" width={200} height={100} />
-						<p className={styles.slogan}>영원한 사랑의 약속, 러브체인</p>
-					</a>
-				</Link>
-				<Button className={styles.button} colorScheme='yellow' variant='outline' isFullWidth onClick={handleKakaoButton}>카카오로 공유하기</Button>
-			</div>
-		</div>
+		<>
+			{info?.isPrivate && (
+				<div className={styles.container}>
+				<Alert
+					status='info'
+					variant='subtle'
+					flexDirection='column'
+					alignItems='center'
+					justifyContent='center'
+					textAlign='center'
+					height='200px'
+					marginBottom='30px'
+					backgroundColor='transparent'
+					marginTop='60px'
+				>
+					<AlertIcon boxSize='40px' mr={0} color='white'/>
+					<AlertTitle mt={4} mb={1} fontSize='lg'>
+						미니사이트가 비공개 상태입니다.
+					</AlertTitle>
+					<AlertDescription maxWidth='sm'>
+						러브체인 자물쇠 소유자는 <br />
+						미니사이트의 공개여부를 선택할 수 있습니다.
+					</AlertDescription>
+					</Alert>
+				</div>
+			)}
+			{!info?.isPrivate && (
+				<div className={styles.container}>
+					<img className={styles.lock_image} src={info?.lockImage} alt="lock" />
+					<div className={styles.profile}>
+						{info?.profileImage?.oneImage && <img className={styles.profile_one} src={info?.profileImage?.oneImage} alt="profile image" />}
+						{info?.profileImage?.twoImage && <img className={styles.profile_two} src={info?.profileImage?.twoImage} alt="profile image" />}
+					</div>
+					<div className={styles.couple_name}>현아 💛️ 이던</div>
+					{info?.options.date && <div className={styles.text}>우리가 만난 지<br />{`${now.diff(dayjs(info?.options.date), 'day')}일..! 🥰`}</div>}
+					{info?.options.coupleImage && (
+					<div className={styles.couple_image}>
+						<img src={info?.options.coupleImage} alt="couple image" />
+					</div>)}
+					{info?.options.oneLine && <div className={styles.text}>{info?.options.oneLine}</div>}
+					<div className={styles.util}>
+						<Link href="/">
+							<a>
+								<Image src="/images/logo.svg" alt="love-chain" width={200} height={100} />
+								<p className={styles.slogan}>영원한 사랑의 약속, 러브체인</p>
+							</a>
+						</Link>
+						<Button className={styles.button} colorScheme='yellow' variant='outline' isFullWidth onClick={handleKakaoButton}>카카오로 공유하기</Button>
+					</div>
+				</div>
+			)}
+		</>
 	);
 }
 
