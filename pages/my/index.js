@@ -3,10 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../src/components/Layout';
 import MyLockList from '../../src/components/MyLockList';
 import { getUserItems } from '../../src/constant/api';
-<<<<<<< HEAD
-import { Spinner } from '@chakra-ui/react';
-import { useUserState } from '../../src/contexts/useUserContext';
-=======
+
 
 // import MyNft from '../../src/components/MyNft';
 // import {
@@ -20,7 +17,6 @@ import { useUserState } from '../../src/contexts/useUserContext';
 
 import { useUserState } from '../../src/contexts/useUserContext';
 import { Spinner } from '@chakra-ui/react';
-import MyLockList from '../../src/components/MyLockList';
 
 
 const MOCK_DATA = {
@@ -52,7 +48,7 @@ const MOCK_DATA = {
     },
   ]
 }
->>>>>>> 4c705d42093464742309aabf1a255a9a505ebec9
+
 
 export default function MyPage() {
   const router = useRouter();
