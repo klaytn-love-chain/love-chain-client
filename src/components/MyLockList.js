@@ -68,7 +68,7 @@ function MyLockList({ list }) {
 												isFullWidth
 												colorScheme="purple"
 											>
-												미니사이트로 이동하기
+												미니사이트로 이동
 											</Button>
 										</a>
 									</Link>

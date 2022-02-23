@@ -1,14 +1,16 @@
 /* eslint-disable react/no-children-prop */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useUserState } from '../../src/contexts/useUserContext'
-import { postItemUserInfo } from '../constant/api'
+import { getItem, getItemUserInfo, postItemUserInfo } from '../constant/api'
 import styles from './LockEdit.module.scss';
 import {
-	Box,
+	Box,Stack,
 	Tabs, TabList, TabPanels, Tab, TabPanel,
 	Alert, AlertIcon, AlertTitle, AlertDescription,
 	Input, InputLeftAddon, InputGroup,
+	RadioGroup, Radio,
 	Button,
 	FormControl, FormLabel,
 	useDisclosure,
@@ -18,20 +20,23 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
+	ModalCloseButton,
+	useToast,
 } from '@chakra-ui/react';
 
-function LockEdit({ tokenId, lockInfo, userInfo }) {
-	console.log(lockInfo, userInfo);
+function LockEdit({ tokenId }) {
+	const router = useRouter();
+	const toast = useToast();
 	const { userAddress, requestKey } = useUserState();
+	const [lockInfo, setLockInfo] = useState(null);
 	const [person1Name, setPeson1Name] = useState('');
 	const [person2Name, setPeson2Name] = useState('');
 
 	const [person1ProfileImage, setPeson1ProfileImage] = useState('');
 	const [person2ProfileImage, setPeson2ProfileImage] = useState('');
 	const [date, setDate] = useState('');
-	const [coupleImage, setCoupleImage] = useState('');
 	const [oneLine, setOneLine] = useState('');
+	const [coupleImage, setCoupleImage] = useState('');
 
 	const [person1Instagram, setPerson1Instagram] = useState('');
 	const [person1Twitter, setPerson1Twitter] = useState('');
@@ -39,6 +44,8 @@ function LockEdit({ tokenId, lockInfo, userInfo }) {
 	const [person2Instagram, setPerson2Instagram] = useState('');
 	const [person2Twitter, setPerson2Twitter] = useState('');
 	const [person2URL, setPerson2URL] = useState('');
+
+	const [isPrivate, setIsPrivate] = useState(null);
 
 	const handlePerson1NameChange = useCallback((e) => setPeson1Name(e.target.value), []);
 	const handlePerson2NameChange = useCallback((e) => setPeson2Name(e.target.value), []);
@@ -56,24 +63,95 @@ function LockEdit({ tokenId, lockInfo, userInfo }) {
 	const handlePerson1URLChange = useCallback((e) => setPerson1URL(e.target.value), []);
 	const handlePerson2URLChange = useCallback((e) => setPerson2URL(e.target.value), []);
 
+	const handleIsPrivateChange = useCallback((e) => { console.log(e), setIsPrivate(e) }, []);
+
 	const {
 		isOpen: isNameModalOpen,
 		onOpen: onNameModalOpen,
 		onClose: onNameModalClose
 	} = useDisclosure();
+	const initInfo = useCallback(async () => {
+
+		if (tokenId) {
+			const lockData = await getItem(tokenId);
+			setLockInfo(lockData);
+			console.log(lockData);
+
+			const userInfo = await getItemUserInfo(tokenId);
+			console.log(userInfo);
+			setPeson1ProfileImage(userInfo.profileImage.oneImage);
+			setPeson2ProfileImage(userInfo.profileImage.twoImage);
+
+			setDate(userInfo.options.date);
+			setOneLine(userInfo.options.oneLine);
+			setCoupleImage(userInfo.options.coupleImage);
+
+			setPerson1Instagram(userInfo.options.socialProfile.oneInstagram);
+			setPerson2Instagram(userInfo.options.socialProfile.twoInstagram);
+			setPerson1Twitter(userInfo.options.socialProfile.oneTwitter);
+			setPerson2Twitter(userInfo.options.socialProfile.twoTwitter);
+			setPerson1URL(userInfo.options.socialProfile.oneURL);
+			setPerson2URL(userInfo.options.socialProfile.twoURL);
+
+			setIsPrivate(userInfo.isPrivate.toString());
+    }
+
+	}, [tokenId]);
 	const handleNameSubmit = () => { }
 	const handleDetailSubmit = async () => {
 		const contents = {
-			oneLine,
+			tokenId,
+			profileImage: {
+				oneImage: '',
+				twoImage: '',
+			},
+			options: {
+				date,
+				oneLine,
+				coupleImage: '',
+				socialProfile: {
+					oneInstagram: '',
+					twoInstagram: '',
+					oneTwitter: '',
+					twoTwitter: '',
+					oneURL: '',
+					twoURL: '',
+				}
+			},
+			isPrivate: isPrivate === 'true',
 		}
-		const result = await postItemUserInfo({
+		const { success, message } = await postItemUserInfo({
 			tokenId,
 			contents,
 			userAddress,
 			requestKey
 		});
-		console.log(result);
+
+		if (success) {
+			await toast({
+				title: '미니사이트 정보가 수정되었습니다.',
+				status: 'success',
+				duration: 1000,
+				isClosable: true,
+			});
+			router.push('/my');
+		}
+
+		if (message === 'Unauthorized') {
+			await toast({
+				title: '권한이 없거나 인증이 만료되었습니다.',
+				description: '다시 로그인 해주세요.',
+				status: 'error',
+				duration: 1000,
+				isClosable: true,
+			});
+			router.push('/login');
+		}
 	}
+
+	useEffect(() => {
+		initInfo();
+	}, [initInfo]);
 
 	return (
 		<div className={styles.container}>
@@ -94,7 +172,7 @@ function LockEdit({ tokenId, lockInfo, userInfo }) {
 			<Tabs size='lg' variant='enclosed' isFitted  colorScheme="purple">
 				<TabList>
 					<Tab>커플이름 수정</Tab>
-					<Tab>미니사이트 수정</Tab>
+					<Tab>미니사이트 정보 수정</Tab>
 				</TabList>
 				<TabPanels>
 					<TabPanel>
@@ -186,49 +264,56 @@ function LockEdit({ tokenId, lockInfo, userInfo }) {
 								</InputGroup>
 							</div>
 
-							<div className={styles.group}>
-								<div className={styles.title}>만난 날짜</div>
-								<InputGroup mb="5">
-									<FormLabel hidden htmlFor='date'>만난 날짜</FormLabel>
-									<Input
-										id='date'
-										type='date'
-										value={date}
-										onChange={handleDateChange}
-									/>
-								</InputGroup>
-							</div>
-
-							<div className={styles.group}>
-								<div className={styles.title}>커플 사진</div>
-								<InputGroup mb="5">
-									<FormLabel hidden htmlFor='coupleImage'>커플 사진</FormLabel>
-									<Input
-										id='coupleImage'
-										type='string'
-										value={coupleImage}
-										placeholder='사진 URL을 입력해주세요.'
-										onChange={handleCoupleImageChange}
+							{lockInfo?.feature.date && (
+								<div className={styles.group}>
+									<div className={styles.title}>만난 날짜</div>
+									<InputGroup mb="5">
+										<FormLabel hidden htmlFor='date'>만난 날짜</FormLabel>
+										<Input
+											id='date'
+											type='date'
+											value={date}
+											onChange={handleDateChange}
 										/>
-								</InputGroup>
-							</div>
+									</InputGroup>
+								</div>
+							)}
 
-							<div className={styles.group}>
-								<div className={styles.title}>한 줄 문장</div>
-								<InputGroup mb="5">
-									<FormLabel hidden htmlFor='oneLine'>한 줄 문장</FormLabel>
-									<Input
-										id='oneLine'
-										type='string'
-										value={oneLine}
-										placeholder='커플을 소개할 수 있는 한 줄 문장을 입력해주세요.'
-										onChange={handleOneLineChange}
-									/>
-								</InputGroup>
-							</div>
+							{lockInfo?.feature.coupleImage && (
+								<div className={styles.group}>
+									<div className={styles.title}>커플 사진</div>
+									<InputGroup mb="5">
+										<FormLabel hidden htmlFor='coupleImage'>커플 사진</FormLabel>
+										<Input
+											id='coupleImage'
+											type='string'
+											value={coupleImage}
+											placeholder='사진 URL을 입력해주세요.'
+											onChange={handleCoupleImageChange}
+											/>
+									</InputGroup>
+								</div>
+							)}
 
-							<div className={styles.group}>
-								<div className={styles.title}>소셜 프로필</div>
+							{lockInfo?.feature.oneLine && (
+								<div className={styles.group}>
+									<div className={styles.title}>한 줄 문장</div>
+									<InputGroup mb="5">
+										<FormLabel hidden htmlFor='oneLine'>한 줄 문장</FormLabel>
+										<Input
+											id='oneLine'
+											type='string'
+											value={oneLine}
+											placeholder='커플을 소개할 수 있는 한 줄 문장을 입력해주세요.'
+											onChange={handleOneLineChange}
+										/>
+									</InputGroup>
+								</div>
+							)}
+
+							{lockInfo?.feature.socialProfile && (
+								<div className={styles.group}>
+									<div className={styles.title}>소셜 프로필</div>
 									<div className={styles.subTitle}>Person1</div>
 									<InputGroup mb="2">
 										<FormLabel hidden htmlFor='person1Instagram'>person1Instagram</FormLabel>
@@ -299,7 +384,22 @@ function LockEdit({ tokenId, lockInfo, userInfo }) {
 										/>
 									</InputGroup>
 								</div>
-							</FormControl>
+							)}
+
+							<div className={styles.group}>
+								<div className={styles.title}>미니사이트 공개여부</div>
+								<InputGroup mb="5">
+									<FormLabel hidden htmlFor='isPrivate'>공개여부</FormLabel>
+									<RadioGroup value={isPrivate} onChange={handleIsPrivateChange} colorScheme="purple">
+										<Stack>
+											<Radio value="false">공개</Radio>
+											<Radio value="true">비공개</Radio>
+										</Stack>
+									</RadioGroup>
+								</InputGroup>
+							</div>
+
+						</FormControl>
 						<Button
 							isFullWidth
 							colorScheme="purple"
