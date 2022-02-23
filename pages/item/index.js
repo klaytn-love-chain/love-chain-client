@@ -12,7 +12,6 @@ import {
   Spinner,
   useDisclosure,
 } from '@chakra-ui/react';
-import { getItems } from '../../src/constant/api';
 
 export default function ItemListPage() {
   const [loading, setLoading] = useState(false)

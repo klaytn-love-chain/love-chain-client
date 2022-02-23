@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../../src/components/Layout'
-import { Heading, Image, Box, Button, Text, Spinner } from '@chakra-ui/react'
+import { Spinner } from '@chakra-ui/react'
 import { getItem } from '../../../src/constant/api';
 import NftDetail from '../../../src/components/NftDetail';
 
@@ -11,8 +11,7 @@ export default function ItemPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [lockData, setlockData] = useState(null);
 
-
-  const getLockData = async () => {
+  const getLockData = useCallback(async () => {
     try {
       setIsLoading(true);
       const data = await getItem(tokenId);
@@ -22,27 +21,16 @@ export default function ItemPage() {
     } finally {
       setIsLoading(false);
     }
-  }
-
+  }, [tokenId]);
 
   useEffect(() =>{
     getLockData();
-  }, [])
+  }, [getLockData])
 
   return (
-    <>
-    {isLoading ? (
-        <Layout>
-          <Spinner />
-        </Layout>
-      ) : (
-      <Layout>
-				<Heading>No. {tokenId} 자물쇠 상세페이지</Heading>
-        {
-          lockData &&  <NftDetail data={lockData} />
-        }
-      </Layout>
-      )}
-    </>
+    <Layout>
+      {isLoading && <Spinner />}
+      {!isLoading && lockData &&  <NftDetail data={lockData} />}
+    </Layout>
   )
 }

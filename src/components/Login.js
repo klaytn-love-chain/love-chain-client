@@ -59,7 +59,7 @@ function Login() {
       Router.replace('/my');
 
     });
-  }, []);
+  }, [userDispatch]);
 
   return (
     <>
