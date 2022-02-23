@@ -1,6 +1,8 @@
 /* eslint-disable react/no-children-prop */
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
+import { useUserState } from '../../src/contexts/useUserContext'
+import { postItemUserInfo } from '../constant/api'
 import styles from './LockEdit.module.scss';
 import {
 	Box,
@@ -19,9 +21,9 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 
-function LockEdit({ lock }) {
-	const [lockData, setLockData] = useState(lock);
-
+function LockEdit({ tokenId, lockInfo, userInfo }) {
+	console.log(lockInfo, userInfo);
+	const { userAddress, requestKey } = useUserState();
 	const [person1Name, setPeson1Name] = useState('');
 	const [person2Name, setPeson2Name] = useState('');
 
@@ -60,18 +62,29 @@ function LockEdit({ lock }) {
 		onClose: onNameModalClose
 	} = useDisclosure();
 	const handleNameSubmit = () => { }
-	const handleDetailSubmit = () => { }
+	const handleDetailSubmit = async () => {
+		const contents = {
+			oneLine,
+		}
+		const result = await postItemUserInfo({
+			tokenId,
+			contents,
+			userAddress,
+			requestKey
+		});
+		console.log(result);
+	}
 
 	return (
 		<div className={styles.container}>
 			<div>
 			{
-				lockData && (
+				lockInfo && (
 					<Image
 						width={200}
 						height={200}
-						src={lockData.lockImage}
-						alt={`${lockData.tokenId} 자물쇠 이미지`}
+						src={lockInfo.lockImage}
+						alt={`${lockInfo.tokenId} 자물쇠 이미지`}
 						quality={100}
 					/>
 				)

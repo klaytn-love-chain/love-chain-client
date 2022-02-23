@@ -25,10 +25,13 @@ export const getItemUserInfo = async (tokenId) => {
   return data;
 };
 
-export const postItemUserInfo = async ({ tokenId, params }) => {
-  const { data } = await axios.post(`${API_DOMAIN}/item/${tokenId}/info`, {
-    params,
-  });
+export const postItemUserInfo = async ({ tokenId, contents, userAddress, requestKey }) => {
+	const { data } = await axios.post(`${API_DOMAIN}/item/${tokenId}/info`,
+		{ data: contents },
+		{ params: {
+			address: userAddress,
+			request_key: requestKey,
+		}});
   return data;
 };
 
@@ -38,7 +41,6 @@ export const deleteItemUserInfo = async (tokenId) => {
 };
 
 export const getUserItems = async (userAddress) => {
-
   const { data } = await axios.get(`${API_DOMAIN}/item/user/${userAddress}`);
   return data;
 };
