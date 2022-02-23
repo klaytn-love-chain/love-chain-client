@@ -4,7 +4,6 @@ import Layout from '../../src/components/Layout';
 import MyLockList from '../../src/components/MyLockList';
 import { getUserItems } from '../../src/constant/api';
 
-
 // import MyNft from '../../src/components/MyNft';
 // import {
 //   Button,
@@ -17,7 +16,6 @@ import { getUserItems } from '../../src/constant/api';
 
 import { useUserState } from '../../src/contexts/useUserContext';
 import { Spinner } from '@chakra-ui/react';
-
 
 const MOCK_DATA = {
   "total": 1,
@@ -48,7 +46,6 @@ const MOCK_DATA = {
     },
   ]
 }
-
 
 export default function MyPage() {
   const router = useRouter();
