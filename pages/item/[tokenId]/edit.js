@@ -37,7 +37,7 @@ export default function ItemEditPage({ lock }) {
     <>
       <Layout>
         {isLoading && isOwner === null && <Spinner />}
-        {!isLoading && isOwner && <div>유효하지 않은 접근입니다.</div>}
+        {!isLoading && !isOwner && <div>유효하지 않은 접근입니다.</div>}
         {!isLoading && isOwner && <LockEdit tokenId={tokenId} />}
       </Layout>
     </>
