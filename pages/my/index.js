@@ -1,8 +1,8 @@
-
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import Layout from '../../src/components/Layout';
 import { getUserItems } from '../../src/constant/api';
-import LockCard from '../../src/components/LockCard';
+import MyNft from '../../src/components/MyNft';
 import {
   Button,
   HStack,
@@ -10,27 +10,33 @@ import {
   Spinner,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useUserState } from '../../src/contexts/useUserContext'
 
 
 
 export default function MyPage() {
+  const router = useRouter();
+  const { tokenId } = router.query;
+  const { userAddress } = useUserState();
   const [isLoading, setIsLoading] = useState(false);
-  const [lockData, setlockData] = useState(null);
-  const fetchLockData = async () => {
+  const [lockData, setLockData] = useState(null);
+
+  const getMyLocks = async () => {
     try {
       setIsLoading(true);
-      const data = await getUserItems();
-      setlockData(data);
+      const data = await getUserItems(userAddress);
+      setLockData(data);
     } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
     }
-  }
+  }  
 
-  useEffect(() =>{
-    fetchLockData();
+  useEffect(() => {
+    getMyLocks();
   }, [])
+
   return (
     <>
       {isLoading ? (
@@ -52,12 +58,10 @@ export default function MyPage() {
             <hr style={{ margin: '1% 10%', border: '0.01em solid gray' }} />
             </HStack>
             {
-              lockData &&  <LockCard list={lockData.list} />
+              lockData &&  <MyNft list={lockData.list} />
             }
         </Layout>
       )}
-
-
     </>
   )
 }
