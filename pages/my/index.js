@@ -2,22 +2,21 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../src/components/Layout';
 import { getUserItems } from '../../src/constant/api';
-<<<<<<< HEAD
-import MyNft from '../../src/components/MyNft';
-import {
-  Button,
-  HStack,
-  Text,
-  Spinner,
-  useDisclosure,
-} from '@chakra-ui/react';
-import { useUserState } from '../../src/contexts/useUserContext'
 
-=======
+// import MyNft from '../../src/components/MyNft';
+// import {
+//   Button,
+//   HStack,
+//   Text,
+//   Spinner,
+//   useDisclosure,
+// } from '@chakra-ui/react';
+// import { useUserState } from '../../src/contexts/useUserContext'
+
 import { useUserState } from '../../src/contexts/useUserContext';
 import { Spinner } from '@chakra-ui/react';
 import MyLockList from '../../src/components/MyLockList';
->>>>>>> master
+
 
 const MOCK_DATA = {
   "total": 1,
