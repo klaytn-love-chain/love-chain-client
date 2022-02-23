@@ -1,20 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styles from './MicroSite.module.scss';
-import { LOCK_OWNER_INFO as data, DOMAIN_URL, KAKAO_JS_KEY } from '../constant';
+import styles from './MiniSite.module.scss';
+import { DOMAIN_URL, KAKAO_JS_KEY } from '../constant';
 import dayjs from 'dayjs';
 import { Button, Image } from '@chakra-ui/react';
 import { useScript } from "../hooks/useScript";
+import { getItemUserInfo } from '../constant/api';
 
-function MicroSite() {
+function MiniSite() {
 	const router = useRouter();
   const { tokenId } = router.query;
 	const now = dayjs();
-	const coupleDate = dayjs(data.options.date);
 	const status = useScript("https://developers.kakao.com/sdk/js/kakao.js");
 	const SHARE_URL = `${DOMAIN_URL}/site/${tokenId}`;
+	const [info, setInfo] = useState(null);
+
+	const initPage = useCallback(async () => {
+		if (tokenId) {
+			const data = await getItemUserInfo(tokenId);
+			setInfo(data);
+		};
+	}, [tokenId]);
 
 	useEffect(() => {
 		if (status === "ready" && window.Kakao) {
@@ -24,7 +32,12 @@ function MicroSite() {
 					window.Kakao.init(KAKAO_JS_KEY);
 				}
 		}
-	}, [SHARE_URL, status]);
+	}, [status]);
+
+	useEffect(() => {
+		initPage();
+	}, [initPage]);
+
 
 	const handleKakaoButton = () => {
 		//window.Kakao.Link.sendScrap({
@@ -35,15 +48,15 @@ function MicroSite() {
 				content: {
 					title: '영원한 사랑의 약속, 러브체인',
 					description: "",
-					imageUrl: "https://love-chain.vercel.app/images/sample-lock.png",
+					imageUrl: info?.lockImage,
 					link: {
 						mobileWebUrl: SHARE_URL,
-						androidExecParams: "test",
+						androidExecParams: "love-chain",
 					},
 				},
 				buttons: [
 					{
-						title: "웹으로 이동",
+						title: "러브체인 미니페이지로 이동",
 						link: {
 							mobileWebUrl: SHARE_URL,
 						},
@@ -54,17 +67,18 @@ function MicroSite() {
 
 	return (
 		<div className={styles.container}>
-			<img className={styles.lock_image} src="/images/sample-lock.png" alt="lock" />
+			<img className={styles.lock_image} src={info?.lockImage} alt="lock" />
 			<div className={styles.profile}>
-				<img className={styles.profile_one} src={data.profileImage.oneImage} alt="profile image" />
-				<img className={styles.profile_two} src={data.profileImage.twoImage} alt="profile image" />
+				{info?.profileImage?.oneImage && <img className={styles.profile_one} src={info?.profileImage?.oneImage} alt="profile image" />}
+				{info?.profileImage?.twoImage && <img className={styles.profile_two} src={info?.profileImage?.twoImage} alt="profile image" />}
 			</div>
 			<div className={styles.couple_name}>현아 💛️ 이던</div>
-			<div className={styles.text}>우리가 만난 지<br />{`${now.diff(coupleDate, 'day')}일..! 🥰`}</div>
+			{info?.options.date && <div className={styles.text}>우리가 만난 지<br />{`${now.diff(dayjs(info?.options.date), 'day')}일..! 🥰`}</div>}
+			{info?.options.coupleImage && (
 			<div className={styles.couple_image}>
-				<img src={data.options.coupleImage} alt="couple image" />
-			</div>
-			<div className={styles.text}>{data.options.oneLine}</div>
+				<img src={info?.options.coupleImage} alt="couple image" />
+			</div>)}
+			{info?.options.oneLine && <div className={styles.text}>{info?.options.oneLine}</div>}
 			<div className={styles.util}>
 				<Link href="/">
 					<a>
@@ -78,5 +92,5 @@ function MicroSite() {
 	);
 }
 
-export default MicroSite;
+export default MiniSite;
 

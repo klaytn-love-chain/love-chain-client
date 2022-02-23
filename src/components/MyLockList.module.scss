@@ -1,0 +1,59 @@
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.title {
+	font-size: 20px;
+	color: #7c33e7;
+	margin-bottom: 30px;
+}
+
+.list {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	.item {
+		width: 25%;
+		padding: 20px;
+		border-radius: 20px;
+		background-color: #fff;
+
+		@media (max-width: 960px) {
+			width: 33%;
+		}
+		@media (max-width: 768px) {
+			width: 50%;
+		}
+		@media (max-width: 320px) {
+			width: 100%;
+		}
+	}
+	.number {
+		text-align: left;
+	}
+	.price {
+		display:flex;
+		justify-content:space-between;
+		margin-bottom: 20px;
+	}
+	.text {
+		margin-top: 20px;
+	}
+}
+
+.sell {
+	text-align: center;
+	.number {
+		margin: 0 auto;
+		max-width: 300px;
+		text-align: left;
+	}
+	.price {
+		margin: 0 auto;
+		max-width: 300px;
+		display:flex;
+		justify-content:space-between;
+		margin-bottom: 20px;
+	}
+}

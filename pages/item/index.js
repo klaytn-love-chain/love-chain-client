@@ -5,10 +5,10 @@ import LockCard from '../../src/components/LockCard'
 import FilterToggle from '../../src/components/FilterToggle'
 import FilterResult from '../../src/components/FilterResult'
 import styled from 'styled-components';
-import { 
+import {
   Button,
-  HStack, 
-  Text, 
+  HStack,
+  Text,
   Spinner,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -17,14 +17,14 @@ import { getItems } from '../../src/constant/api';
 export default function ItemListPage() {
   const [loading, setLoading] = useState(false)
   const [lockData, setLockData] = useState({
-    list : [], 
+    list : [],
     total: 0
   })
 
   // 무한스크롤링 기능
   const [page, setPage] = useState(0)
   const [scrolling, setScrolling] = useState(false)
-  
+
   // Filter Toggle
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
@@ -42,10 +42,10 @@ export default function ItemListPage() {
         isAvailable: false,
         offset: 0 + (12 * page)
     })
-    
-  // optionData에 따른 url 변경 적용 
+
+  // optionData에 따른 url 변경 적용
   const url = `https://hohyeon.site/api/item?${optionData.date ? 'date=true' : ''}${optionData.oneLine ? '&oneLine=true' : ''}${optionData.coupleImage ? '&coupleImage=true' : ''}${optionData.socialProfile ? '&socialProfile=true' : ''}${optionData.isAvailable ? '&isAvailable=true' : ''}${optionData.price.order == 'desc' ? '&price=desc' : '&price=asc'}&limit=12&offset=${offsetNumber}`;
-  
+
   // 무한스크롤링 기능
   const getMoreItems = async() => {
       setScrolling(true)
@@ -103,8 +103,8 @@ export default function ItemListPage() {
             page={page}
             setPage={setPage}
             scrolling={scrolling}
-            optionData={optionData} 
-            lockList={lockData.list} 
+            optionData={optionData}
+            lockList={lockData.list}
           />
         </Layout>
       )}

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './LockEdit.module.scss';
@@ -288,8 +289,8 @@ function LockEdit({ lock }) {
 							</FormControl>
 						<Button
 							isFullWidth
-							onClick={handleDetailSubmit}
 							colorScheme="purple"
+							onClick={handleDetailSubmit}
 						>
 							수정하기
 						</Button>

@@ -21,6 +21,10 @@ button {
   cursor: pointer;
 }
 
+li {
+  list-style: none;
+}
+
 .swiper {
   overflow: visible !important;
 }

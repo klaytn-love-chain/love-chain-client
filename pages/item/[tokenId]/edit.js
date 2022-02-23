@@ -13,7 +13,7 @@ export default function ItemEditPage({ lock }) {
   const [lockData, setLockData] = useState(null);
 
   const initPage = useCallback(async () => {
-    if (tokenId && address) {
+    if (tokenId && userAddress) {
       const { list } = await getUserItems(userAddress);
       const ownLock = list.find(item => item.tokenId === tokenId);
       setIsOwner(Boolean(ownLock));
