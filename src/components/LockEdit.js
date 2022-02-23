@@ -102,20 +102,20 @@ function LockEdit({ tokenId }) {
 		const contents = {
 			tokenId,
 			profileImage: {
-				oneImage: '',
-				twoImage: '',
+				oneImage,
+				twoImage,
 			},
 			options: {
 				date,
 				oneLine,
-				coupleImage: '',
+				coupleImage,
 				socialProfile: {
-					oneInstagram: '',
-					twoInstagram: '',
-					oneTwitter: '',
-					twoTwitter: '',
-					oneURL: '',
-					twoURL: '',
+					oneInstagram,
+					twoInstagram,
+					oneTwitter,
+					twoTwitter,
+					oneURL,
+					twoURL,
 				}
 			},
 			isPrivate: isPrivate === 'true',

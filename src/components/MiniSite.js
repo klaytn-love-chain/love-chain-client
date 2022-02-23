@@ -102,13 +102,25 @@ function MiniSite() {
 						{info?.profileImage?.oneImage && <img className={styles.profile_one} src={info?.profileImage?.oneImage} alt="profile image" />}
 						{info?.profileImage?.twoImage && <img className={styles.profile_two} src={info?.profileImage?.twoImage} alt="profile image" />}
 					</div>
-					<div className={styles.couple_name}>현아 💛️ 이던</div>
+					<div className={styles.couple_name}>{info?.profileName.oneName} 💛️ {info?.profileName.twoName}</div>
+					<div className={styles.social_instagram}>
+						<span>{info?.options.socialProfile.oneInstagram}</span>
+						<span>{info?.options.socialProfile.twoInstagram}</span>
+					</div>
+					<div className={styles.social_twitter}>
+						<span>{info?.options.socialProfile.oneTwitter}</span>
+						<span>{info?.options.socialProfile.twoTwitter}</span>
+					</div>
 					{info?.options.date && <div className={styles.text}>우리가 만난 지<br />{`${now.diff(dayjs(info?.options.date), 'day')}일..! 🥰`}</div>}
 					{info?.options.coupleImage && (
 					<div className={styles.couple_image}>
 						<img src={info?.options.coupleImage} alt="couple image" />
 					</div>)}
 					{info?.options.oneLine && <div className={styles.text}>{info?.options.oneLine}</div>}
+					<div className={styles.social_url}>
+						<span>{info?.options.socialProfile.oneURL}</span>
+						<span>{info?.options.socialProfile.twoURL}</span>
+					</div>
 					<div className={styles.util}>
 						<Link href="/">
 							<a>
