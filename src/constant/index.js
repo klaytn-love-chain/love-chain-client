@@ -1,4 +1,4 @@
-export const DOMAIN_URL = 'https://love-chain.vercel.app';
+export const DOMAIN_URL = 'https://my-love-chain.vercel.app';
 export const KAKAO_JS_KEY = '4625c6b714cd4d29948eae59390200c7';
 
 export const LOCK_OWNER_INFO = {
