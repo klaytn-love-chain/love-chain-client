@@ -14,11 +14,21 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Container
 } from '@chakra-ui/react';
 import styles from './MyLockList.module.scss';
+import { sellNft } from '../constant/api';
+import QRCode from 'qrcode.react';
+
+const DEFAULT_QR_CODE = "DEFAULT";
 
 function MyLockList({ list }) {
+
+	const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
+
+	const [wishPrice, setWishPrice ] = useState(0);
 	const [lockToSell, setLockToSell] = useState(null);
+	const handlesetLockToSell = useCallback((e) => setWishPrice(e.target.value), []);
 	const {
 		isOpen: isSellModalOpen,
 		onOpen: onSellModalOpen,
@@ -28,7 +38,28 @@ function MyLockList({ list }) {
 		setLockToSell(item);
 		onSellModalOpen();
 	}, [onSellModalOpen]);
-	const handleSellLockSubmit = () => { };
+	const handleSellLockSubmit = (tokenId, price) => {
+		var price2 = price.toString(16);
+
+        sellNft(tokenId, price2, setQrvalue, (result) => {
+            alert(JSON.stringify(result));
+        });
+        {qrvalue !== "DEFAULT" ? (
+            <Container
+            style={{
+                backgroundColor: "white",
+                width: 150,
+                height: 150,
+                padding: 20,
+              }}
+            >
+              <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
+
+              <br />
+              <br />
+            </Container>
+          ) : null}
+    };
 
 	return (
 		<div className={styles.container}>
@@ -118,6 +149,8 @@ function MyLockList({ list }) {
 									id='wishPrice'
 									type='text'
 									placeholder='마켓에 판매하고자 하는 가격을 적어주세요.'
+									value={wishPrice}
+									onChange={handlesetLockToSell}
 								/>
 								<InputRightAddon children='Klay' />
 							</InputGroup>
@@ -127,7 +160,7 @@ function MyLockList({ list }) {
 						<Button
 							isFullWidth
 							colorScheme="purple"
-							onClick={handleSellLockSubmit}>
+							onClick={() => handleSellLockSubmit(lockToSell?.price, wishPrice)}>
 							판매하기
 						</Button>
 					</ModalFooter>

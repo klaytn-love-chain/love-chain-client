@@ -3,6 +3,15 @@ import axios from 'axios';
 const API_DOMAIN = 'https://hohyeon.site/api';
 const A2P_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 
+const isMobile = () => {
+  try {
+    document.createEvent('TouchEvent');
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 export const getItem = async (tokenId) => {
   const { data } = await axios.get(`${API_DOMAIN}/item/${tokenId}`);
   return data;
@@ -61,6 +70,7 @@ export const postUser = async (address, request_key) => {
 
 export const buyNft = async (
   tokenId,
+  price,
   setQrvalue,
   callback
 ) => {
@@ -68,10 +78,27 @@ export const buyNft = async (
   executeContract(
       "0xb4A3355156e3184EAA4d21aD613C2CA407A593dB",
       functionJson,
-      "10000000000000000",
-      `[\"${tokenId}\","\0xb4A3355156e3184EAA4d21aD613C2CA407A593dB"]`,
+      price,
+      `[\"${tokenId}\"]`,
       setQrvalue,
       callback
+  );
+};
+
+export const sellNft = async (
+  fromAddress,
+  tokenId,
+  price,
+  setQrvalue,
+  callback
+) => {
+  const functionJson = '{ "constant": false, "inputs": [ { "name": "from", "type": "address" }, { "name": "to", "type": "address" }, { "name": "tokenId", "type": "uint256" }, { "name": "_data", "type": "bytes" } ], "name": "safeTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }';
+  executeContract(
+    "0xB6b07961571c69A2723Df736d56402c8e061c364",
+    functionJson,
+    `[\"${fromAddress}", \"0xB6b07961571c69A2723Df736d56402c8e061c364", \"${tokenId}", \"${price}"]`,
+    setQrvalue,
+    callback
   );
 };
 

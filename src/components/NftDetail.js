@@ -10,8 +10,8 @@ function NftDetail({ data }) {
 
     const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
 
-    const onClickBuyButton = (tokenId) => {
-        buyNft(tokenId, setQrvalue, (result) => {
+    const onClickBuyButton = (tokenId, price) => {
+        buyNft(tokenId, price, setQrvalue, (result) => {
             alert(JSON.stringify(result));
         });
         {qrvalue !== "DEFAULT" ? (
@@ -40,7 +40,7 @@ function NftDetail({ data }) {
     const isMarcket = (boolean) => {
         if (boolean) {
             return (
-                <Button onClick={() => onClickBuyButton(data.tokenId)} colorScheme='pink' variant='solid'>
+                <Button onClick={() => onClickBuyButton(data.tokenId, data.price)} colorScheme='pink' variant='solid'>
                     구매하기
                 </Button>
             );
