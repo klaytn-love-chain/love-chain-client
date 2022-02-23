@@ -6,34 +6,13 @@ import QRCode from 'qrcode.react';
 
 import { getUserRequestKey, postUser } from '../constant/api';
 import { useUserDispatch } from '../contexts/useUserContext';
-
-const isMobile = () => {
-  try {
-    document.createEvent('TouchEvent');
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-
-const getKlipAccressUrl = (method, request_key) => {
-  switch (method) {
-    case 'QR':
-      return `https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-    case 'iOS':
-      return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-    case 'android':
-      return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-    default:
-      return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-  }
-};
+import { getKlipAccessUrl, isMobile } from '../constant/util';
 
 const getAddress = async (setQrvalue, callback) => {
   const { request_key } = await getUserRequestKey();
 
-  if (isMobile()) window.location.href = getKlipAccressUrl('iOS', request_key);
-  else setQrvalue(() => getKlipAccressUrl('QR', request_key));
+  if (isMobile()) window.location.href = getKlipAccessUrl('iOS', request_key);
+  else setQrvalue(() => getKlipAccessUrl('QR', request_key));
 
   let id = setInterval(async () => {
     const res = await axios.get(`https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${request_key}`);
@@ -50,14 +29,12 @@ function Login() {
   const [qrvalue, setQrvalue] = useState('DEFAULT');
 
   useEffect(() => {
-
     getAddress(setQrvalue, async (address, request_key) => {
       const { ok, msg } = await postUser(address, request_key);
 
       if (ok) userDispatch({ type: 'LOGIN', userAddress: address, request_key });
       else alert(msg);
       Router.replace('/my');
-
     });
   }, [userDispatch]);
 

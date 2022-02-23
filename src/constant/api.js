@@ -1,16 +1,8 @@
 import axios from 'axios';
+import { getKlipAccessUrl, isMobile } from './util';
 
 const API_DOMAIN = 'https://hohyeon.site/api';
-const A2P_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
-
-const isMobile = () => {
-  try {
-    document.createEvent('TouchEvent');
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
+const A2P_API_PREPARE_URL = 'https://a2a-api.klipwallet.com/v2/a2a/prepare';
 
 export const getItem = async (tokenId) => {
   const { data } = await axios.get(`${API_DOMAIN}/item/${tokenId}`);
@@ -36,12 +28,16 @@ export const getItemUserInfo = async (tokenId) => {
 };
 
 export const postItemUserInfo = async ({ tokenId, contents, userAddress, requestKey }) => {
-	const { data } = await axios.post(`${API_DOMAIN}/item/${tokenId}/info`,
-		{ ...contents },
-		{ params: {
-			address: userAddress,
-			request_key: requestKey,
-		}});
+  const { data } = await axios.post(
+    `${API_DOMAIN}/item/${tokenId}/info`,
+    { ...contents },
+    {
+      params: {
+        address: userAddress,
+        request_key: requestKey,
+      },
+    }
+  );
   return data;
 };
 
@@ -68,54 +64,38 @@ export const postUser = async (address, request_key) => {
   return data;
 };
 
-export const buyNft = async (
-  tokenId,
-  price,
-  setQrvalue,
-  callback
-) => {
-  const functionJson = '{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" } ], "name": "buyLoveChain", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }';
+export const buyNft = async (tokenId, price, setQrvalue, callback) => {
+  const functionJson =
+    '{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" } ], "name": "buyLoveChain", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }';
   executeContract(
-      "0xb4A3355156e3184EAA4d21aD613C2CA407A593dB",
-      functionJson,
-      price,
-      `[\"${tokenId}\"]`,
-      setQrvalue,
-      callback
-  );
-};
-
-export const sellNft = async (
-  fromAddress,
-  tokenId,
-  price,
-  setQrvalue,
-  callback
-) => {
-  const functionJson = '{ "constant": false, "inputs": [ { "name": "from", "type": "address" }, { "name": "to", "type": "address" }, { "name": "tokenId", "type": "uint256" }, { "name": "_data", "type": "bytes" } ], "name": "safeTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }';
-  executeContract(
-    "0xB6b07961571c69A2723Df736d56402c8e061c364",
+    '0x82ded39b2c44a6388b0c2921d5491835cf5a4585',
     functionJson,
-    `[\"${fromAddress}", \"0xB6b07961571c69A2723Df736d56402c8e061c364", \"${tokenId}", \"${price}"]`,
+    price.toString().padEnd(16, '0'),
+    `[\"${tokenId}\"]`,
     setQrvalue,
     callback
   );
 };
 
-export const executeContract = (
-  txTo,
-  functionJSON,
-  value,
-  params,
-  setQrvalue,
-  callback
-) => {
+export const sellNft = async (fromAddress, tokenId, price, setQrvalue, callback) => {
+  const functionJson =
+    '{ "constant": false, "inputs": [ { "name": "from", "type": "address" }, { "name": "to", "type": "address" }, { "name": "tokenId", "type": "uint256" }, { "name": "_data", "type": "bytes" } ], "name": "safeTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }';
+  executeContract(
+    '0x0303293ec90f35bfc87bd790d3ef245e9f9ab38d',
+    functionJson,
+    `[\"${fromAddress}", \"0x82ded39b2c44a6388b0c2921d5491835cf5a4585", \"${tokenId}", \"${price}"]`,
+    setQrvalue,
+    callback
+  );
+};
+
+export const executeContract = (txTo, functionJSON, value, params, setQrvalue, callback) => {
   axios
     .post(A2P_API_PREPARE_URL, {
       bapp: {
-        name: "NSeoulTowerMarket",
+        name: 'NSeoulTowerMarket',
       },
-      type: "execute_contract",
+      type: 'execute_contract',
       transaction: {
         to: txTo,
         abi: functionJSON,
@@ -125,25 +105,21 @@ export const executeContract = (
     })
     .then((response) => {
       const { request_key } = response.data;
-      if (isMobile) {
-        window.location.href = getKlipAccessUrl("android", request_key);
+      if (isMobile()) {
+        window.location.href = getKlipAccessUrl('android', request_key);
       } else {
-        setQrvalue(getKlipAccessUrl("QR", request_key));
+        setQrvalue(getKlipAccessUrl('QR', request_key));
       }
 
       let timerId = setInterval(() => {
-        axios
-          .get(
-            `https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${request_key}`
-          )
-          .then((res) => {
-            if (res.data.result) {
-              console.log(`[Result] ${JSON.stringify(res.data.result)}`);
-              callback(res.data.result);
-              clearInterval(timerId);
-              setQrvalue("DEFAULT");
-            }
-          });
+        axios.get(`https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${request_key}`).then((res) => {
+          if (res.data.result) {
+            console.log(`[Result] ${JSON.stringify(res.data.result)}`);
+            callback(res.data.result);
+            clearInterval(timerId);
+            setQrvalue('DEFAULT');
+          }
+        });
       }, 1000);
     });
 };
