@@ -11,7 +11,7 @@ export default function ItemEditPage({ lock }) {
   const { tokenId } = router.query;
   const { userAddress } = useUserState();
   const [isLoading, setIsLoading] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
+  const [isOwner, setIsOwner] = useState(null);
 
   const initPage = useCallback(async () => {
     try {
@@ -36,11 +36,9 @@ export default function ItemEditPage({ lock }) {
   return (
     <>
       <Layout>
-        {isLoading && <Spinner />}
-        {!isLoading && isOwner
-          ? <LockEdit tokenId={tokenId}/>
-          : <div>유효하지 않은 접근입니다.</div>
-        }
+        {isLoading && isOwner === null && <Spinner />}
+        {!isLoading && isOwner && <div>유효하지 않은 접근입니다.</div>}
+        {!isLoading && isOwner && <LockEdit tokenId={tokenId} />}
       </Layout>
     </>
   )
