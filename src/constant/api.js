@@ -68,9 +68,9 @@ export const buyNft = async (tokenId, price, setQrvalue, callback) => {
   const functionJson =
     '{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" } ], "name": "buyLoveChain", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }';
   executeContract(
-    '0x82ded39b2c44a6388b0c2921d5491835cf5a4585',
+    '0x565771c4F153b434851742B79346c724edd2F517',
     functionJson,
-    price.toString().padEnd(16, '0'),
+    price.toString().padEnd(17, '0'),
     `[\"${tokenId}\"]`,
     setQrvalue,
     callback
@@ -81,9 +81,10 @@ export const sellNft = async (fromAddress, tokenId, price, setQrvalue, callback)
   const functionJson =
     '{ "constant": false, "inputs": [ { "name": "from", "type": "address" }, { "name": "to", "type": "address" }, { "name": "tokenId", "type": "uint256" }, { "name": "_data", "type": "bytes" } ], "name": "safeTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }';
   executeContract(
-    '0x0303293ec90f35bfc87bd790d3ef245e9f9ab38d',
+    '0x2A4ad034cCbE6D6Ab8eE77AADB9f48d003Ad093e',
     functionJson,
-    `[\"${fromAddress}", \"0x82ded39b2c44a6388b0c2921d5491835cf5a4585", \"${tokenId}", \"${price}"]`,
+    '0',
+    `[\"${fromAddress}", \"0x565771c4F153b434851742B79346c724edd2F517", \"${tokenId}", \"${price}"]`,
     setQrvalue,
     callback
   );

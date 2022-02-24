@@ -14,21 +14,7 @@ function NftDetail({ data }) {
         buyNft(tokenId, price, setQrvalue, (result) => {
             alert(JSON.stringify(result));
         });
-        {qrvalue !== "DEFAULT" ? (
-            <Container
-            style={{
-                backgroundColor: "white",
-                width: 300,
-                height: 300,
-                padding: 20,
-              }}
-            >
-              <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
-
-              <br />
-              <br />
-            </Container>
-          ) : null}
+        
     };
 
     const available = (boolean) => {
@@ -40,9 +26,26 @@ function NftDetail({ data }) {
     const isMarcket = (boolean) => {
         if (boolean) {
             return (
+                <>
                 <Button onClick={() => onClickBuyButton(data.tokenId, data.price)} colorScheme='pink' variant='solid'>
                     구매하기
                 </Button>
+                {qrvalue !== "DEFAULT" ? (
+                    <Container
+                    style={{
+                        backgroundColor: "white",
+                        width: 300,
+                        height: 300,
+                        padding: 20,
+                      }}
+                    >
+                      <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
+        
+                      <br />
+                      <br />
+                    </Container>
+                  ) : null}
+                </>
             );
         } else {
             return '소유자가 있습니다.';

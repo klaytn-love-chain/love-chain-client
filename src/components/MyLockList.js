@@ -19,13 +19,14 @@ import {
 import styles from './MyLockList.module.scss';
 import { sellNft } from '../constant/api';
 import QRCode from 'qrcode.react';
+import { useUserState } from '../../src/contexts/useUserContext';
 
 const DEFAULT_QR_CODE = "DEFAULT";
 
 function MyLockList({ list }) {
 
 	const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
-
+	const { userAddress } = useUserState();
 	const [wishPrice, setWishPrice ] = useState(0);
 	const [lockToSell, setLockToSell] = useState(null);
 	const handlesetLockToSell = useCallback((e) => setWishPrice(e.target.value), []);
@@ -39,26 +40,26 @@ function MyLockList({ list }) {
 		onSellModalOpen();
 	}, [onSellModalOpen]);
 	const handleSellLockSubmit = (tokenId, price) => {
-		var price2 = price.toString(16);
+		const price2 = price.toString(16).padStart(64, '0');
 
-        sellNft(tokenId, price2, setQrvalue, (result) => {
+        sellNft(userAddress, tokenId, price2, setQrvalue, (result) => {
             alert(JSON.stringify(result));
         });
-        {qrvalue !== "DEFAULT" ? (
-            <Container
-            style={{
-                backgroundColor: "white",
-                width: 150,
-                height: 150,
-                padding: 20,
-              }}
-            >
-              <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
+        // {qrvalue !== "DEFAULT" ? (
+        //     <Container
+        //     style={{
+        //         backgroundColor: "white",
+        //         width: 150,
+        //         height: 150,
+        //         padding: 20,
+        //       }}
+        //     >
+        //       <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
 
-              <br />
-              <br />
-            </Container>
-          ) : null}
+        //       <br />
+        //       <br />
+        //     </Container>
+        //   ) : null}
     };
 
 	return (
@@ -160,9 +161,24 @@ function MyLockList({ list }) {
 						<Button
 							isFullWidth
 							colorScheme="purple"
-							onClick={() => handleSellLockSubmit(lockToSell?.price, wishPrice)}>
+							onClick={() => handleSellLockSubmit(lockToSell?.tokenId, wishPrice)}>
 							판매하기
 						</Button>
+						{qrvalue !== "DEFAULT" ? (
+							<Container
+							style={{
+								backgroundColor: "white",
+								width: 150,
+								height: 150,
+								padding: 20,
+							}}
+							>
+							<QRCode value={qrvalue} size={128} style={{ margin: "auto" }} />
+
+							<br />
+							<br />
+							</Container>
+						) : null}
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
