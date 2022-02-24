@@ -89,7 +89,7 @@ function FilterDrawer({
               variant={dateFilter ? "solid" : "outline"}
               colorScheme='purple'
               cursor="pointer"
-              onClick={() => setDateFilter(!dateFilter)}
+              onClick={() => setDateFilter(dateFilter ? null : true)}
 						>
 							<TagLabel>만난날짜 등록가능</TagLabel>
             </Tag>
@@ -99,7 +99,7 @@ function FilterDrawer({
               variant={coupleImageFilter ? "solid" : "outline"}
               colorScheme='purple'
               cursor="pointer"
-              onClick={() => setCoupleImageFilter(!coupleImageFilter)}
+              onClick={() => setCoupleImageFilter(coupleImageFilter ? null : true)}
 						>
 							<TagLabel>커플사진 등록가능</TagLabel>
             </Tag>
@@ -109,7 +109,7 @@ function FilterDrawer({
               variant={oneLineFilter ? "solid" : "outline"}
               colorScheme='purple'
               cursor="pointer"
-              onClick={() => setOneLineFilter(!oneLineFilter)}
+              onClick={() => setOneLineFilter(oneLineFilter ? null : true)}
 						>
 							<TagLabel>한줄문장 등록가능</TagLabel>
             </Tag>
@@ -119,7 +119,7 @@ function FilterDrawer({
               variant={socialProfileFilter ? "solid" : "outline"}
               colorScheme='purple'
               cursor="pointer"
-              onClick={() => setSocialProfileFilter(!socialProfileFilter)}
+              onClick={() => setSocialProfileFilter(socialProfileFilter ? null : true)}
 						>
 							<TagLabel>소셜프로필 등록가능</TagLabel>
             </Tag>
