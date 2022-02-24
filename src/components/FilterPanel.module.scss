@@ -1,0 +1,30 @@
+.container {
+	position: fixed;
+	width: 100%;
+  background-color: white;
+  top: 90px;
+  z-index: 100;
+	border: solid .5px #dcdcde;
+	box-shadow: 0 1px 3px 0 rgba(151,154,157,.3), 0 2px 15px 0 rgba(151,154,157,.2);
+}
+
+.result {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: row;
+	padding: 10px 0;
+	border: solid .5px #dcdcde;
+	.text {
+		margin-right: 20px;
+	}
+}
+
+.filters {
+	padding: 10px 0;
+	display: flex;
+	justify-content: center;
+	li {
+		margin: 0 5px;
+	}
+}
