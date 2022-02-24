@@ -60,6 +60,7 @@ export default function ItemListPage() {
   useEffect(() => {
     setOffsetFilter(0);
     setLockList([]);
+    getMoreItems();
   }, [priceFilter, dateFilter, coupleImageFilter, socialProfileFilter, isAvailableFilter])
 
   const endRef = useCallback(node => {
