@@ -21,9 +21,13 @@
 }
 
 .filters {
-	padding: 10px 0;
+	padding: 10px;
 	display: flex;
 	justify-content: center;
+	overflow-x: scroll;
+	@media (max-width: 768px) {
+		justify-content: flex-start;
+	}
 	li {
 		margin: 0 5px;
 	}
