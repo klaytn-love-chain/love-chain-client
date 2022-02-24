@@ -1,19 +1,43 @@
-.cardContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    margin: 1rem;
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 0 20px;
 }
 
-.card {
-    padding: 1rem;
-    border: 1px solid black;
-    border-radius: 0.5rem;
-    margin: 1rem;
-    cursor: pointer;
-    transition: 0.4s;
+.table {
+	width: 300px;
+	margin: 20px auto;
+	text-align: center;
 }
 
-.card:hover {
-    transform: scale(1.05);
-    padding: 0.5rem;
+.item {
+	position: relative;
+	width: 300px;
+	margin: 0 auto;
+	.number {
+		position:absolute;
+		display: inline-block;
+		top:0;
+		left:0;
+		z-index: 10;
+		padding:10px;
+		width: 50%;
+		text-align: left;
+		color: #fff;
+		font-size: 14px;
+	}
+	.price {
+		position:absolute;
+		display: inline-block;
+		bottom:15px;
+		left:50%;
+		z-index: 10;
+		transform: translateX(50%);
+		padding:5px;
+		width: 30%;
+		text-align: center;
+		background-color: #7c33e7;
+		color: #fff;
+		font-size: 14px;
+	}
 }

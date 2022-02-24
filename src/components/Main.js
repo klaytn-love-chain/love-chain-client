@@ -100,17 +100,21 @@ function Main() {
 						<SwiperSlide
 							key={index}
 							className={styles.slide}>
-							<div className={styles.item}>
-								<div className={styles.rank}>
-									<div className={styles.number}>
-										{index + 1}위
+							<Link href={`/item/${item.tokenId}`}>
+								<a>
+									<div className={styles.item}>
+										<div className={styles.rank}>
+											<div className={styles.number}>
+												{index + 1}위
+											</div>
+											<div className={styles.price}>
+												{item.price} Klay
+											</div>
+										</div>
+										<img src={item.lockImage} alt='trend locks' />
 									</div>
-									<div className={styles.price}>
-										{item.price} Klay
-									</div>
-								</div>
-								<img src={item.lockImage} alt='trend locks' />
-							</div>
+								</a>
+							</Link>
 						</SwiperSlide>
 					)
 				})
