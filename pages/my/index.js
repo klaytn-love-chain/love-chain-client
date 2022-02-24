@@ -3,49 +3,8 @@ import { useRouter } from 'next/router';
 import Layout from '../../src/components/Layout';
 import MyLockList from '../../src/components/MyLockList';
 import { getUserItems } from '../../src/constant/api';
-
-// import MyNft from '../../src/components/MyNft';
-// import {
-//   Button,
-//   HStack,
-//   Text,
-//   Spinner,
-//   useDisclosure,
-// } from '@chakra-ui/react';
-// import { useUserState } from '../../src/contexts/useUserContext'
-
-import { useUserState } from '../../src/contexts/useUserContext';
 import { Spinner } from '@chakra-ui/react';
-
-const MOCK_DATA = {
-  "total": 1,
-  "list": [
-    {
-      "_id": "62133fdc364f9e7c57582025",
-      "tokenId": "2",
-      "lockImage": "https://metadata-store.klaytnapi.com/5650fadf-b79e-adc4-0055-6c40c76bac9e/e8c582ca-4e98-d6b2-0709-2e84f33d5ce5.png",
-      "price": "2"
-    },
-    {
-      "_id": "62133fdc364f9e7c57582025",
-      "tokenId": "3",
-      "lockImage": "https://metadata-store.klaytnapi.com/5650fadf-b79e-adc4-0055-6c40c76bac9e/e8c582ca-4e98-d6b2-0709-2e84f33d5ce5.png",
-      "price": "2"
-    },
-    {
-      "_id": "62133fdc364f9e7c57582025",
-      "tokenId": "4",
-      "lockImage": "https://metadata-store.klaytnapi.com/5650fadf-b79e-adc4-0055-6c40c76bac9e/e8c582ca-4e98-d6b2-0709-2e84f33d5ce5.png",
-      "price": "2"
-    },
-    {
-      "_id": "62133fdc364f9e7c57582025",
-      "tokenId": "5",
-      "lockImage": "https://metadata-store.klaytnapi.com/5650fadf-b79e-adc4-0055-6c40c76bac9e/e8c582ca-4e98-d6b2-0709-2e84f33d5ce5.png",
-      "price": "2"
-    },
-  ]
-}
+import { useUserState } from '../../src/contexts/useUserContext';
 
 export default function MyPage() {
   const router = useRouter();
