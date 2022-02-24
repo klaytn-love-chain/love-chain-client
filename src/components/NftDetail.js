@@ -83,24 +83,24 @@ function NftDetail({ data }) {
           </Thead>
           <Tbody>
             <Tr>
-              <Td>왕관</Td>
-              <Td>커플사진</Td>
-              <Td>{available(data.feature.coupleImage)}</Td>
-            </Tr>
-            <Tr>
               <Td>날개</Td>
               <Td>만난날짜</Td>
               <Td>{available(data.feature.date)}</Td>
             </Tr>
             <Tr>
-              <Td>클로버</Td>
-              <Td>소셜프로필</Td>
-              <Td>{available(data.feature.oneLine)}</Td>
+              <Td>왕관</Td>
+              <Td>커플사진</Td>
+              <Td>{available(data.feature.coupleImage)}</Td>
             </Tr>
             <Tr>
               <Td>패턴</Td>
               <Td>한줄문장</Td>
               <Td>{available(data.feature.socialProfile)}</Td>
+            </Tr>
+            <Tr>
+              <Td>클로버</Td>
+              <Td>소셜프로필</Td>
+              <Td>{available(data.feature.oneLine)}</Td>
             </Tr>
           </Tbody>
         </Table>
