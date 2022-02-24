@@ -133,7 +133,7 @@ function FilterDrawer({
               variant={isAvailableFilter ? "solid" : "outline"}
               colorScheme='purple'
               cursor="pointer"
-              onClick={() => setIsAvailableFilter(!isAvailableFilter)}
+              onClick={() => setIsAvailableFilter(isAvailableFilter ? null: true)}
 						>
 							<TagLabel>구매가능만 보기</TagLabel>
             </Tag>
