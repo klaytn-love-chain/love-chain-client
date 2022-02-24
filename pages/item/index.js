@@ -57,6 +57,11 @@ export default function ItemListPage() {
     getMoreItems();
   }, [offsetFilter])
 
+  useEffect(() => {
+    setOffsetFilter(0);
+    setLockList([]);
+  }, [priceFilter, dateFilter, coupleImageFilter, socialProfileFilter, isAvailableFilter])
+
   const endRef = useCallback(node => {
     if (loading) return;
     if (observer.current) observer.current.disconnect()
