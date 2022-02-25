@@ -21,7 +21,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import styles from './MyLockList.module.scss';
-import { sellNft } from '../constant/api';
+import { sellNft, deleteItemUserInfo } from '../constant/api';
 import QRCode from 'qrcode.react';
 import { useUserState } from '../../src/contexts/useUserContext';
 
@@ -31,7 +31,7 @@ function MyLockList({ list }) {
   const toast = useToast();
 
   const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
-  const { userAddress } = useUserState();
+  const { userAddress, requestKey } = useUserState();
   const [wishPrice, setWishPrice] = useState(0);
   const [lockToSell, setLockToSell] = useState(null);
   const handlesetLockToSell = useCallback((e) => setWishPrice(e.target.value), []);
@@ -45,6 +45,8 @@ function MyLockList({ list }) {
   );
   const handleSellLockSubmit = (tokenId, price) => {
     const price2 = price.toString(16).padStart(64, '0');
+
+    deleteItemUserInfo({tokenId, userAddress, requestKey});
 
     sellNft(userAddress, tokenId, price2, setQrvalue, async (result) => {
       if (result.status === 'success') {

@@ -41,8 +41,21 @@ export const postItemUserInfo = async ({ tokenId, contents, userAddress, request
   return data;
 };
 
-export const deleteItemUserInfo = async (tokenId) => {
-  const { data } = await axios.delete(`${API_DOMAIN}/item/${tokenId}`);
+// export const deleteItemUserInfo = async (tokenId) => {
+//   const { data } = await axios.delete(`${API_DOMAIN}/item/${tokenId}`);
+//   return data;
+// };
+
+export const deleteItemUserInfo = async ({tokenId, userAddress, requestKey }) => {
+  const { data } = await axios.delete(
+    `${API_DOMAIN}/item/${tokenId}`,
+    {
+          params: {
+            address: userAddress,
+            request_key: requestKey,
+          },
+        }
+    );
   return data;
 };
 
