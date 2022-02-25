@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import Layout from '../../src/components/Layout'
-import MarketLockList from '../../src/components/MarketLockList'
-import FilterDrawer from '../../src/components/FilterDrawer'
-import FilterPanel from '../../src/components/FilterPanel'
-import {
-  Spinner,
-  useDisclosure,
-} from '@chakra-ui/react';
+import Layout from '../../src/components/Layout';
+import MarketLockList from '../../src/components/MarketLockList';
+import FilterDrawer from '../../src/components/FilterDrawer';
+import FilterPanel from '../../src/components/FilterPanel';
+import { Spinner, useDisclosure } from '@chakra-ui/react';
 import { getItems } from '../../src/constant/api';
 
 export default function ItemListPage() {
@@ -24,11 +21,7 @@ export default function ItemListPage() {
   const [offsetFilter, setOffsetFilter] = useState(0);
   const [hasMore, setHasMore] = useState(null);
 
-  const {
-    isOpen: isDrawerOpen,
-    onOpen: onDrawerOpen,
-    onClose: onDrawerClose
-  } = useDisclosure();
+  const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
 
   const getMoreItems = useCallback(async () => {
     try {
@@ -43,7 +36,7 @@ export default function ItemListPage() {
       };
       const data = await getItems(params);
       console.log('data', data, offsetFilter, observer.current, lockList.length);
-      setLockList(prev => [...prev, ...data.list]);
+      setLockList((prev) => [...prev, ...data.list]);
       setTotalLock(data.total);
       setHasMore(data.total > lockList.length);
     } catch (err) {
@@ -55,24 +48,30 @@ export default function ItemListPage() {
 
   useEffect(() => {
     getMoreItems();
-  }, [offsetFilter])
+  }, [offsetFilter]);
 
   useEffect(() => {
     setOffsetFilter(0);
     setLockList([]);
     getMoreItems();
-  }, [priceFilter, dateFilter, coupleImageFilter, socialProfileFilter, isAvailableFilter])
+  }, [priceFilter, dateFilter, coupleImageFilter, socialProfileFilter, isAvailableFilter]);
 
-  const endRef = useCallback(node => {
-    if (loading) return;
-    if (observer.current) observer.current.disconnect()
-    observer.current = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && hasMore) {
-        setOffsetFilter(prev => prev + 12);
-      }
-    }, { threshold: 0.1 });
-    if (node) observer.current.observe(node);
-  }, [hasMore, loading]);
+  const endRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && hasMore) {
+            setOffsetFilter((prev) => prev + 12);
+          }
+        },
+        { threshold: 0.1 }
+      );
+      if (node) observer.current.observe(node);
+    },
+    [hasMore, loading]
+  );
 
   return (
     <Layout>
@@ -88,9 +87,7 @@ export default function ItemListPage() {
           isAvailableFilter={isAvailableFilter}
           onDrawerOpen={onDrawerOpen}
         />
-        <MarketLockList
-          lockList={lockList}
-        />
+        <MarketLockList lockList={lockList} />
         <div ref={endRef} />
         <FilterDrawer
           totalLock={totalLock}
@@ -112,5 +109,5 @@ export default function ItemListPage() {
         />
       </>
     </Layout>
-  )
+  );
 }
