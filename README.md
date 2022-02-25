@@ -19,3 +19,13 @@ https://my-love-chain.vercel.app/
 - 소셜프로필(SocialProfile): 커플의 소셜프로필 링크
 
 > 자물쇠가 가진 특별한 기능에 따라 자물쇠의 디자인이 달라지고, 입력받은 내용을 바탕으로 자물쇠 별 미니사이트가 생성
+
+### 자물쇠
+![parts](https://user-images.githubusercontent.com/17515656/155755762-d50466a0-40e9-428c-87a1-0193a1f9f61e.png)
+
+<img width="520" alt="combination" src="https://user-images.githubusercontent.com/17515656/155755636-de05e4f4-e776-4e71-b96e-85548b115443.png">
+
+
+
+
+
