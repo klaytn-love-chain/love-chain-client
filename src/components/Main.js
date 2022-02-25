@@ -62,7 +62,9 @@ function Main() {
 					</p>
 				</Box>
 				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
-					<div className={styles.thumbnail}></div>
+					<div className={styles.thumbnail}>
+						<img className={styles.logo} src="/images/feature3.png" alt="love-chain" />
+					</div>
 					<p className={styles.text}>
 						러브체인 자물쇠는<br/>
 						기록한 정보를 바탕으로<br/>
