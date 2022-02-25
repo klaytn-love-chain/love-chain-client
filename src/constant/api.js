@@ -90,11 +90,24 @@ export const sellNft = async (fromAddress, tokenId, price, setQrvalue, callback)
   );
 };
 
+export const writeCoupleName = async (tokenId, oneName, twoName, setQrvalue, callback) => {
+  const functionJSON = `{"constant": false, "inputs": [{"name": "tokenId", "type": "uint256"},{"name": "name1","type": "string"},{"name": "name2","type": "string"}],"name": "writeCoupleName", "outputs": [],"payable": false,"stateMutability": "nonpayable", "type": "function"}`;
+
+  executeContract(
+    '0x2A4ad034cCbE6D6Ab8eE77AADB9f48d003Ad093e',
+    functionJSON,
+    '0',
+    `[\"${tokenId}", \"${oneName}", \"${twoName}"]`,
+    setQrvalue,
+    callback
+  );
+};
+
 export const executeContract = (txTo, functionJSON, value, params, setQrvalue, callback) => {
   axios
     .post(A2P_API_PREPARE_URL, {
       bapp: {
-        name: 'NSeoulTowerMarket',
+        name: 'LOVE CHAIN',
       },
       type: 'execute_contract',
       transaction: {
@@ -114,8 +127,7 @@ export const executeContract = (txTo, functionJSON, value, params, setQrvalue, c
 
       let timerId = setInterval(() => {
         axios.get(`https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${request_key}`).then((res) => {
-          if (res.data.result) {
-            console.log(`[Result] ${JSON.stringify(res.data.result)}`);
+          if (res.data.result && res.data.result.status !== 'pending') {
             callback(res.data.result);
             clearInterval(timerId);
             setQrvalue('DEFAULT');
