@@ -29,11 +29,10 @@
 			position:absolute;
 			display: inline-block;
 			bottom:15px;
-			left:50%;
+			right:15px;
 			z-index: 10;
-			transform: translateX(50%);
 			padding:5px;
-			width: 30%;
+			width: 35%;
 			text-align: center;
 			background-color: #7c33e7;
 			color: #fff;
@@ -45,9 +44,22 @@
 		}
 		@media (max-width: 768px) {
 			width: 50%;
+			&:nth-child(2n) {
+				padding:10px 20px 10px 10px
+			}
+			&:nth-child(2n + 1) {
+				padding:10px 10px 10px 20px
+			}
+
 		}
 		@media (max-width: 320px) {
 			width: 100%;
+			&:nth-child(2n) {
+				padding: 20px;
+			}
+			&:nth-child(2n + 1) {
+				padding: 20px;
+			}
 		}
 
 		&:hover {
@@ -80,8 +92,7 @@
 			border-radius: 50%;
 		}
 		.main {
-
-
+			font-size: 0;
 		}
 		.detail {
 			position: absolute;
