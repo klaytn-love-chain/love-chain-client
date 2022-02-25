@@ -51,11 +51,11 @@ function MyApp({ Component, pageProps }) {
         `}
       />
       <Head>
-        <title>러브체인 | 사랑의 자물쇠</title>
-        <meta name="description" content="러브체인 | NFT 사랑의 자물쇠" />
-        <meta property="og:title" content="Content Title" />
+        <title>러브체인 | 영원한 사랑의 약속</title>
+        <meta property="og:title" content="러브체인 | 영원한 사랑의 약속" />
         <meta property="og:image" content="/images/graph.png" />
-        <meta property="og:description" content="영원한 사랑의 약속" />
+        <meta name="description" content="Klaytn 사랑의 자물쇠 NFT" />
+        <meta property="og:description" content="Klaytn 사랑의 자물쇠 NFT" />
       </Head>
       <UserProvider>
         <ChakraProvider theme={theme}>
