@@ -49,12 +49,12 @@ function MiniSite() {
 		window.Kakao.Link.sendDefault({
 			objectType: "feed",
 				content: {
-					title: '영원한 사랑의 약속, 러브체인',
-					description: "",
+					title: `${info?.profileName.oneName} 💛️ ${info?.profileName.twoName}`,
+					description: "영원한 사랑의 약속 | 러브체인",
 					imageUrl: info?.lockImage,
 					link: {
 						mobileWebUrl: SHARE_URL,
-						androidExecParams: "love-chain",
+						androidExecParams: "LOVE-CHAIN",
 					},
 				},
 				buttons: [

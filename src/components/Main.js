@@ -34,7 +34,7 @@ function Main() {
 			</div>
 			<div className={styles.intro}>
 				<p>영원한 사랑의 약속,<br/> 러브체인에 기록해보세요! </p>
-				<p>Klaytn 사랑의 자물쇠 NFT<br/>남산타워 스팟 한정판 500피스 오픈</p>
+				<p>Klaytn 사랑의 자물쇠 NFT<br />남산타워 스팟 한정판 500피스 민팅<br/>1차 민팅: 100개(2/27)<br/>2차 민팅: 400개(3월 중순)</p>
 				<p>특별한 기념일에 연인과 함께<br/>러브체인 자물쇠를 걸어보세요!</p>
 			</div>
 			<Flex className={styles.feature} direction={['column', 'column', 'row']} padding={['0 5%', '0 12%', '0 5%', '0 12%', '0 15%']}>

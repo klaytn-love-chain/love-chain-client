@@ -4,6 +4,7 @@ import { extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import { Global } from '@emotion/react';
 import { UserProvider } from '../src/contexts/useUserContext';
+import Head from 'next/head';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/autoplay';
@@ -49,6 +50,13 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
+      <Head>
+        <title>러브체인 | 사랑의 자물쇠</title>
+        <meta name="description" content="러브체인 | NFT 사랑의 자물쇠" />
+        <meta property="og:title" content="Content Title" />
+        <meta property="og:image" content="/images/graph.png" />
+        <meta property="og:description" content="영원한 사랑의 약속" />
+      </Head>
       <UserProvider>
         <ChakraProvider theme={theme}>
           <Component {...pageProps} />

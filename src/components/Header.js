@@ -16,7 +16,7 @@ function Header() {
       </Link>
       <div className={styles.menu}>
         <Link href="/item">
-          <a className={styles.menu_item}>Market</a>
+          <a className={styles.menu_item}>남산타워 마켓</a>
         </Link>
         {isLoggedIn ? (
           <Link href="/my">
