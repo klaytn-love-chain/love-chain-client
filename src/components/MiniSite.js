@@ -99,8 +99,8 @@ function MiniSite() {
 				<div className={styles.container}>
 					<img className={styles.lock_image} src={info?.lockImage} alt="lock" />
 					<div className={styles.profile}>
-						{info?.profileImage?.oneImage && <img className={styles.profile_one} src={info?.profileImage?.oneImage} alt="profile image" />}
-						{info?.profileImage?.twoImage && <img className={styles.profile_two} src={info?.profileImage?.twoImage} alt="profile image" />}
+						{info?.profileImage?.onePerson && <img className={styles.profile_one} src={info?.profileImage?.onePerson} alt="profile image" />}
+						{info?.profileImage?.twoPerson && <img className={styles.profile_two} src={info?.profileImage?.twoPerson} alt="profile image" />}
 					</div>
 					<div className={styles.couple_name}>{info?.profileName.oneName} 💛️ {info?.profileName.twoName}</div>
 					<div className={styles.social_instagram}>

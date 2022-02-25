@@ -39,7 +39,9 @@ function Main() {
 			</div>
 			<Flex className={styles.feature} direction={['column', 'column', 'row']} padding={['0 5%', '0 12%', '0 5%', '0 12%', '0 15%']}>
 				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
-					<div className={styles.thumbnail}></div>
+					<div className={styles.thumbnail}>
+						<img className={styles.logo} src="/images/feature1.png" alt="love-chain" />
+					</div>
 					<p className={styles.text}>
 						러브체인 자물쇠를 구매하면,<br/>
 						Klaytn에 2명의 이름을<br/>
@@ -47,7 +49,9 @@ function Main() {
 					</p>
 				</Box>
 				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
-					<div className={styles.thumbnail}></div>
+					<div className={styles.thumbnail}>
+						<img className={styles.logo} src="/images/feature2.png" alt="love-chain" />
+					</div>
 					<p className={styles.text}>
 						특별한 러브체인 자물쇠들은 추가적으로<br/>
 						(1) 사귀기 시작한 날짜,<br/>
