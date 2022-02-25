@@ -94,10 +94,10 @@ export const sellNft = async (fromAddress, tokenId, price, setQrvalue, callback)
   const functionJson =
     '{ "constant": false, "inputs": [ { "name": "from", "type": "address" }, { "name": "to", "type": "address" }, { "name": "tokenId", "type": "uint256" }, { "name": "_data", "type": "bytes" } ], "name": "safeTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }';
   executeContract(
-    '0x2A4ad034cCbE6D6Ab8eE77AADB9f48d003Ad093e',
+    LOVECHAIN_ADDRESS,
     functionJson,
     '0',
-    `[\"${fromAddress}", \"0x565771c4F153b434851742B79346c724edd2F517", \"${tokenId}", \"${price}"]`,
+    `[\"${fromAddress}", \"${NSEOULTOWERMARCKET}", \"${tokenId}", \"${price}"]`,
     setQrvalue,
     callback
   );
@@ -107,7 +107,7 @@ export const writeCoupleName = async (tokenId, oneName, twoName, setQrvalue, cal
   const functionJSON = `{"constant": false, "inputs": [{"name": "tokenId", "type": "uint256"},{"name": "name1","type": "string"},{"name": "name2","type": "string"}],"name": "writeCoupleName", "outputs": [],"payable": false,"stateMutability": "nonpayable", "type": "function"}`;
 
   executeContract(
-    '0x2A4ad034cCbE6D6Ab8eE77AADB9f48d003Ad093e',
+    LOVECHAIN_ADDRESS,
     functionJSON,
     '0',
     `[\"${tokenId}", \"${oneName}", \"${twoName}"]`,
