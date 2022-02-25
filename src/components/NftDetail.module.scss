@@ -14,6 +14,7 @@
 	position: relative;
 	width: 300px;
 	margin: 0 auto;
+	font-size: 0;
 	.number {
 		position:absolute;
 		display: inline-block;
@@ -30,11 +31,10 @@
 		position:absolute;
 		display: inline-block;
 		bottom:15px;
-		left:50%;
+		right:15px;
 		z-index: 10;
-		transform: translateX(50%);
 		padding:5px;
-		width: 30%;
+		width: 35%;
 		text-align: center;
 		background-color: #7c33e7;
 		color: #fff;
