@@ -40,14 +40,16 @@ function Login() {
 
   return (
     <>
-      <Heading size="md" marginTop={30}>
-        아래의 QR코드를 스캔하시면 Klip 로그인으로 이동합니다.
-      </Heading>
       {!isMobile() &&
         (qrvalue === 'DEFAULT' ? (
           <Spinner thickness="4px" speed="0.65s" size="xl" margin={150} />
-        ) : (
-          <QRCode value={qrvalue} size={256} style={{ margin: 'auto', marginTop: 50 }} />
+      ) : (
+          <>
+            <Heading size="md" marginTop={30}>
+              아래의 QR코드를 스캔하시면<br/> Klip 로그인으로 이동합니다.
+            </Heading>
+            <QRCode value={qrvalue} size={256} style={{ margin: 'auto', marginTop: 50 }} />
+          </>
         ))}
     </>
   );
