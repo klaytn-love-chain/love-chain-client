@@ -81,7 +81,7 @@ export const buyNft = async (tokenId, price, setQrvalue, callback) => {
   const functionJson =
     '{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" } ], "name": "buyLoveChain", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }';
   executeContract(
-    '0x565771c4F153b434851742B79346c724edd2F517',
+    NSEOULTOWERMARCKET,
     functionJson,
     price.toString().padEnd(17, '0'),
     `[\"${tokenId}\"]`,
