@@ -136,3 +136,20 @@ export const executeContract = (txTo, functionJSON, value, params, setQrvalue, c
       }, 1000);
     });
 };
+
+export const uploadAsset = async (formData) => {
+  try {
+    const response = await axios.post('https://metadata-api.klaytnapi.com/v1/metadata/asset', formData, {
+      headers: {
+        Authorization:
+          'Basic ' + Buffer.from(process.env.NEXT_PUBLIC_KAS_ACCESS_KEY_ID + ':' + process.env.NEXT_PUBLIC_KAS_SECRET_ACCESS_KEY).toString('base64'),
+        'x-chain-id': '8217',
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data.uri;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};

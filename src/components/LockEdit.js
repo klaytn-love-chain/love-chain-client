@@ -1,9 +1,9 @@
 /* eslint-disable react/no-children-prop */
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useUserState } from '../../src/contexts/useUserContext';
-import { getItem, getItemUserInfo, postItemUserInfo, writeCoupleName } from '../constant/api';
+import { getItem, getItemUserInfo, postItemUserInfo, uploadAsset, writeCoupleName } from '../constant/api';
 import styles from './LockEdit.module.scss';
 import {
   Box,
@@ -47,11 +47,8 @@ function LockEdit({ tokenId }) {
   const [person2Name, setPeson2Name] = useState('');
   const [qrvalue, setQrvalue] = useState('DEFAULT');
 
-  const [person1ProfileImage, setPeson1ProfileImage] = useState('');
-  const [person2ProfileImage, setPeson2ProfileImage] = useState('');
   const [date, setDate] = useState('');
   const [oneLine, setOneLine] = useState('');
-  const [coupleImage, setCoupleImage] = useState('');
 
   const [person1Instagram, setPerson1Instagram] = useState('');
   const [person1Twitter, setPerson1Twitter] = useState('');
@@ -62,13 +59,14 @@ function LockEdit({ tokenId }) {
 
   const [isPrivate, setIsPrivate] = useState(null);
 
+  const coupleImageRef = useRef();
+  const person1ProfileRef = useRef();
+  const person2ProfileRef = useRef();
+
   const handlePerson1NameChange = useCallback((e) => setPeson1Name(e.target.value), []);
   const handlePerson2NameChange = useCallback((e) => setPeson2Name(e.target.value), []);
 
-  const handlePerson1ProfileImageChange = useCallback((e) => setPeson1ProfileImage(e.target.value), []);
-  const handlePerson2ProfileImageChange = useCallback((e) => setPeson2ProfileImage(e.target.value), []);
   const handleDateChange = useCallback((e) => setDate(e.target.value), []);
-  const handleCoupleImageChange = useCallback((e) => setCoupleImage(e.target.value), []);
   const handleOneLineChange = useCallback((e) => setOneLine(e.target.value), []);
 
   const handlePerson1InstagramChange = useCallback((e) => setPerson1Instagram(e.target.value), []);
@@ -89,12 +87,9 @@ function LockEdit({ tokenId }) {
       setLockInfo(lockData);
 
       const userInfo = await getItemUserInfo(tokenId);
-      setPeson1ProfileImage(userInfo.profileImage.oneImage);
-      setPeson2ProfileImage(userInfo.profileImage.twoImage);
 
       setDate(userInfo.options.date);
       setOneLine(userInfo.options.oneLine);
-      setCoupleImage(userInfo.options.coupleImage);
 
       setPerson1Instagram(userInfo.options.socialProfile.oneInstagram);
       setPerson2Instagram(userInfo.options.socialProfile.twoInstagram);
@@ -132,23 +127,32 @@ function LockEdit({ tokenId }) {
     });
   };
   const handleDetailSubmit = async () => {
+    const formData1 = new FormData();
+    const formData2 = new FormData();
+    const formData3 = new FormData();
+    formData1.append('file', person1ProfileRef.current.files[0]);
+    formData2.append('file', person2ProfileRef.current.files[0]);
+    formData3.append('file', coupleImageRef.current.files[0]);
+
+    const [coupleImage, oneImage, twoImage] = await await Promise.all([uploadAsset(formData3), uploadAsset(formData1), uploadAsset(formData2)]);
+
     const contents = {
       tokenId,
       profileImage: {
-        oneImage,
-        twoImage,
+        onePerson: oneImage || null,
+        twoPerson: twoImage || null,
       },
       options: {
         date,
         oneLine,
-        coupleImage,
+        coupleImage: coupleImage || null,
         socialProfile: {
-          oneInstagram,
-          twoInstagram,
-          oneTwitter,
-          twoTwitter,
-          oneURL,
-          twoURL,
+          oneInstagram: person1Instagram,
+          twoInstagram: person2Instagram,
+          oneTwitter: person1Twitter,
+          twoTwitter: person2Twitter,
+          oneURL: person1URL,
+          twoURL: person2URL,
         },
       },
       isPrivate: isPrivate === 'true',
@@ -249,29 +253,11 @@ function LockEdit({ tokenId }) {
                 <div className={styles.title}>프로필 사진</div>
                 <div className={styles.subTitle}>Person1</div>
                 <InputGroup mb="2">
-                  <FormLabel hidden htmlFor="person1ProfileImage">
-                    Person1
-                  </FormLabel>
-                  <Input
-                    id="person1ProfileImage"
-                    type="text"
-                    value={person1ProfileImage}
-                    onChange={handlePerson1ProfileImageChange}
-                    placeholder="사진 URL을 입력해주세요."
-                  />
+                  <input ref={person1ProfileRef} id="person1ProfileImage" type="file" />
                 </InputGroup>
                 <div className={styles.subTitle}>Person2</div>
                 <InputGroup mb="5">
-                  <FormLabel hidden htmlFor="person2ProfileImage">
-                    Person2
-                  </FormLabel>
-                  <Input
-                    id="person2ProfileImage"
-                    type="text"
-                    value={person2ProfileImage}
-                    onChange={handlePerson2ProfileImageChange}
-                    placeholder="사진 URL을 입력해주세요."
-                  />
+                  <input ref={person2ProfileRef} id="person2ProfileImage" type="file" />
                 </InputGroup>
               </div>
 
@@ -291,17 +277,8 @@ function LockEdit({ tokenId }) {
                 <div className={styles.group}>
                   <div className={styles.title}>커플 사진</div>
                   <InputGroup mb="5">
-                    <FormLabel hidden htmlFor="coupleImage">
-                      커플 사진
-                    </FormLabel>
-                    <Input
-                      id="coupleImage"
-                      type="string"
-                      value={coupleImage}
-                      placeholder="사진 URL을 입력해주세요."
-                      onChange={handleCoupleImageChange}
-                    />
-                  </InputGroup>
+                    <input ref={coupleImageRef} id="coupleImage" type="file" />
+                  </InputGroup>{' '}
                 </div>
               )}
 
