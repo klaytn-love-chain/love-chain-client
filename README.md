@@ -3,6 +3,9 @@
 ## 러브체인, 영원한 사랑의 약속.
 > Klaytn에 기록하는 사랑의 자물쇠 NFT
 
+
+![logo](https://user-images.githubusercontent.com/17515656/155762639-ebcdd35b-bf52-4196-9f12-62bd0f52c85a.png)
+
 * 공식사이트
 https://my-love-chain.vercel.app/
 
