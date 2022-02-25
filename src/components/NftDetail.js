@@ -1,52 +1,58 @@
-import React, { useState } from "react";
-import styles from "./NftDetail.module.scss";
-import Image from "next/image";
-import {
-  Container,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-	Td,
-} from "@chakra-ui/react";
-import QRCode from "qrcode.react";
-import { buyNft } from "../constant/api";
+import React, { useState } from 'react';
+import styles from './NftDetail.module.scss';
+import Image from 'next/image';
+import { Container, Button, Table, Thead, Tbody, Tr, Th, Td, useToast } from '@chakra-ui/react';
+import QRCode from 'qrcode.react';
+import { buyNft } from '../constant/api';
 
-const DEFAULT_QR_CODE = "DEFAULT";
+const DEFAULT_QR_CODE = 'DEFAULT';
 function NftDetail({ data }) {
+  const toast = useToast();
+
   const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
 
   const onClickBuyButton = (tokenId, price) => {
-    buyNft(tokenId, price, setQrvalue, (result) => {
-      alert(JSON.stringify(result));
+    buyNft(tokenId, price, setQrvalue, async (result) => {
+      if (result.status === 'success') {
+        await toast({
+          title: '자물쇠 구매가 완료되었습니다',
+          description: `tx_hash: ${result.tx_hash} `,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          containerStyle: {
+            minWidth: 'max-content',
+          },
+        });
+      } else {
+        await toast({
+          title: '자물쇠 구매에 실패하였습니다. 다시 시도해주세요.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
 
-  const available = (boolean) => (boolean ? "가능" : "불가");
+  const available = (boolean) => (boolean ? '가능' : '불가');
   const isMarket = (boolean) => {
     if (boolean) {
       return (
         <>
-          <Button
-            onClick={() => onClickBuyButton(data.tokenId, data.price)}
-            isFullWidth
-            colorScheme="purple"
-            variant="solid"
-          >
+          <Button onClick={() => onClickBuyButton(data.tokenId, data.price)} isFullWidth colorScheme="purple" variant="solid">
             구매하기
           </Button>
-          {qrvalue !== "DEFAULT" ? (
+          {qrvalue !== 'DEFAULT' ? (
             <Container
               style={{
-                backgroundColor: "white",
+                backgroundColor: 'white',
                 width: 300,
                 height: 300,
                 padding: 20,
               }}
             >
-              <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
+              <QRCode value={qrvalue} size={256} style={{ margin: 'auto' }} />
             </Container>
           ) : null}
         </>
@@ -62,14 +68,8 @@ function NftDetail({ data }) {
   return (
     <div className={styles.container}>
       <div key={data.tokenId} className={styles.item}>
-        <Image
-          src={data.lockImage}
-          alt={`No.${data.tokenId}`}
-          width={300}
-          height={300}
-          quality={100}
-        />
-				<span className={styles.number}> No. {data.tokenId} </span>
+        <Image src={data.lockImage} alt={`No.${data.tokenId}`} width={300} height={300} quality={100} />
+        <span className={styles.number}> No. {data.tokenId} </span>
         <span className={styles.price}> {data.price} Klay </span>
       </div>
       <div className={styles.table}>
