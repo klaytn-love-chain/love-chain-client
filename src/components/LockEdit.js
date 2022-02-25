@@ -113,14 +113,16 @@ function LockEdit({ tokenId }) {
           containerStyle: {
             minWidth: 'max-content',
           },
-        });
+				});
+				router.push('/my');
       } else {
         await toast({
           title: '자물쇠에 기록이 실패하였습니다. 다시 시도해주세요.',
           status: 'error',
           duration: 3000,
           isClosable: true,
-        });
+				});
+				router.push('/my');
       }
 
       onNameModalClose();

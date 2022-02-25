@@ -41,7 +41,7 @@ function Login() {
   return (
     <>
       <Heading size="md" marginTop={30}>
-        아래의 QR코드를 스캔해주세요!
+        아래의 QR코드를 스캔하시면 Klip 로그인으로 이동합니다.
       </Heading>
       {!isMobile() &&
         (qrvalue === 'DEFAULT' ? (

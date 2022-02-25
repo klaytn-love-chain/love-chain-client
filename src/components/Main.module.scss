@@ -8,6 +8,24 @@
 	}
 }
 
+.background {
+	position: absolute;
+	top:70px;
+	left:50%;
+	transform: translateX(-50%);
+	z-index: 100;
+	width: 60%;
+	padding-top:100vh;
+	background: url('/images/background.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	opacity: 0.8;
+	@media (max-width: 768px) {
+		top:6%;
+		width: 120%;
+	}
+}
+
 .effect {
   position: relative;
 	z-index: 1000;

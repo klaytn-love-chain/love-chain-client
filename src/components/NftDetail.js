@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from './NftDetail.module.scss';
+import Link from 'next/link';
 import Image from 'next/image';
-import { Container, Button, Table, Thead, Tbody, Tr, Th, Td, useToast } from '@chakra-ui/react';
+import { Container, Heading, Button, Table, Thead, Tbody, Tr, Th, Td, useToast } from '@chakra-ui/react';
 import QRCode from 'qrcode.react';
 import { buyNft } from '../constant/api';
 
@@ -51,7 +52,10 @@ function NftDetail({ data }) {
                 height: 300,
                 padding: 20,
               }}
-            >
+						>
+							<Heading size="md" marginTop={30}>
+								아래의 QR코드를 스캔하시면 구매페이지로 이동합니다.
+							</Heading>
               <QRCode value={qrvalue} size={256} style={{ margin: 'auto' }} />
             </Container>
           ) : null}
@@ -104,7 +108,14 @@ function NftDetail({ data }) {
             </Tr>
           </Tbody>
         </Table>
-        <br />
+				<br />
+				<Link href={`/site/${data.tokenId}`}>
+					<a>
+						<Button isFullWidth colorScheme="pink" variant="solid" mb="2">
+							미니사이트로 이동
+						</Button>
+					</a>
+				</Link>
         {isMarket(data.isAvailable)}
       </div>
     </div>

@@ -25,6 +25,7 @@ function Main() {
 		<>
 			<div className={styles.hero}>
 				<img className={styles.logo} src="/images/logo_main.png" alt="love-chain" />
+				<div className={styles.background}></div>
 			</div>
 			<div className={styles.effect}>
 				<div className={styles.stars}></div>
