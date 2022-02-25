@@ -81,7 +81,7 @@ export const buyNft = async (tokenId, price, setQrvalue, callback) => {
   const functionJson =
     '{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" } ], "name": "buyLoveChain", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }';
   executeContract(
-    NSEOULTOWERMARCKET,
+    process.env.NEXT_PUBLIC_NSEOULTOWERMARKET,
     functionJson,
     price.toString().padEnd(17, '0'),
     `[\"${tokenId}\"]`,
@@ -94,10 +94,10 @@ export const sellNft = async (fromAddress, tokenId, price, setQrvalue, callback)
   const functionJson =
     '{ "constant": false, "inputs": [ { "name": "from", "type": "address" }, { "name": "to", "type": "address" }, { "name": "tokenId", "type": "uint256" }, { "name": "_data", "type": "bytes" } ], "name": "safeTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }';
   executeContract(
-    LOVECHAIN_ADDRESS,
+    process.env.NEXT_PUBLIC_LOVECHAIN_ADDRESS,
     functionJson,
     '0',
-    `[\"${fromAddress}", \"${NSEOULTOWERMARCKET}", \"${tokenId}", \"${price}"]`,
+    `[\"${fromAddress}", \"${process.env.NEXT_PUBLIC_NSEOULTOWERMARKET}", \"${tokenId}", \"${price}"]`,
     setQrvalue,
     callback
   );
@@ -107,7 +107,7 @@ export const writeCoupleName = async (tokenId, oneName, twoName, setQrvalue, cal
   const functionJSON = `{"constant": false, "inputs": [{"name": "tokenId", "type": "uint256"},{"name": "name1","type": "string"},{"name": "name2","type": "string"}],"name": "writeCoupleName", "outputs": [],"payable": false,"stateMutability": "nonpayable", "type": "function"}`;
 
   executeContract(
-    LOVECHAIN_ADDRESS,
+    process.env.NEXT_PUBLIC_LOVECHAIN_ADDRESS,
     functionJSON,
     '0',
     `[\"${tokenId}", \"${oneName}", \"${twoName}"]`,
