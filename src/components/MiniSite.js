@@ -51,7 +51,7 @@ function MiniSite() {
 			objectType: "feed",
 				content: {
 					title: `${info?.profileName.oneName} 💛️ ${info?.profileName.twoName} 영원한 사랑의 약속`,
-					description: "러브체인 | Klaytn에 기록하는 사랑의 자물쇠 NFT",
+					description: "러브체인 | Klaytn 사랑의 자물쇠 NFT",
 					imageUrl: info?.lockImage,
 					link: {
 						mobileWebUrl: SHARE_URL,
