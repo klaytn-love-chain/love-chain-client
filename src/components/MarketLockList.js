@@ -21,7 +21,7 @@ function MarketLockList({ lockList }) {
                       alt={`No.${item.tokenId}`}
                       width={300}
                       height={300}
-                      quality={100}
+                      quality={80}
                     />
                     <span className={styles.number}> No. {item.tokenId} </span>
                     <span className={styles.price}> {item.price} Klay </span>

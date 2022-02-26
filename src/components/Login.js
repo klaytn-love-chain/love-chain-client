@@ -45,7 +45,7 @@ function Login() {
           <Spinner thickness="4px" speed="0.65s" size="xl" margin={150} />
       ) : (
           <>
-            <Heading size="md" marginTop={30}>
+            <Heading size="md" mt={30} textAlign={'center'} lineHeight={1.5}>
               아래의 QR코드를 스캔하시면<br/> Klip 로그인으로 이동합니다.
             </Heading>
             <QRCode value={qrvalue} size={256} style={{ margin: 'auto', marginTop: 50 }} />

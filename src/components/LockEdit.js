@@ -423,7 +423,7 @@ function LockEdit({ tokenId }) {
                 </div>
               ) : (
                 <>
-                  <Heading size="md" marginBottom={10} textAlign={'center'}>
+                  <Heading size="md" mb={10} textAlign={'center'} lineHeight={1.5}>
                     아래의 QR코드를 스캔해주세요!
                   </Heading>
                   <QRCode value={qrvalue} size={256} style={{ margin: 'auto' }} />
