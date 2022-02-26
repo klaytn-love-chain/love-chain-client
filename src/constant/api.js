@@ -46,16 +46,13 @@ export const postItemUserInfo = async ({ tokenId, contents, userAddress, request
 //   return data;
 // };
 
-export const deleteItemUserInfo = async ({tokenId, userAddress, requestKey }) => {
-  const { data } = await axios.delete(
-    `${API_DOMAIN}/item/${tokenId}`,
-    {
-          params: {
-            address: userAddress,
-            request_key: requestKey,
-          },
-        }
-    );
+export const deleteItemUserInfo = async ({ tokenId, userAddress, requestKey }) => {
+  const { data } = await axios.delete(`${API_DOMAIN}/item/${tokenId}`, {
+    params: {
+      address: userAddress,
+      request_key: requestKey,
+    },
+  });
   return data;
 };
 
@@ -83,7 +80,7 @@ export const buyNft = async (tokenId, price, setQrvalue, callback) => {
   executeContract(
     process.env.NEXT_PUBLIC_NSEOULTOWERMARKET,
     functionJson,
-    price.toString().padEnd(17, '0'),
+    price.toString() + '0'.repeat(18),
     `[\"${tokenId}\"]`,
     setQrvalue,
     callback
