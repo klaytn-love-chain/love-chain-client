@@ -44,7 +44,7 @@ function MyLockList({ list }) {
     [onSellModalOpen]
   );
   const handleSellLockSubmit = (tokenId, price) => {
-    const price2 = '0x' + price.toString(16).padStart(64, '0');
+    const price2 = '0x' + Number(price).toString(16).padStart(64, '0');
 
     sellNft(userAddress, tokenId, price2, setQrvalue, async (result) => {
       if (result.status === 'success') {
