@@ -40,7 +40,7 @@ function Main() {
 			<Flex className={styles.feature} direction={['column', 'column', 'row']} padding={['0 5%', '0 12%', '0 5%', '0 12%', '0 15%']}>
 				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
 					<div className={styles.thumbnail}>
-						<img className={styles.logo} src="/images/feature1.png" alt="love-chain" />
+						<img className={styles.logo} src="/images/feature1.png" alt="" />
 					</div>
 					<p className={styles.text}>
 						러브체인 자물쇠를 구매하면,<br/>
@@ -50,7 +50,7 @@ function Main() {
 				</Box>
 				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
 					<div className={styles.thumbnail}>
-						<img className={styles.logo} src="/images/feature2.png" alt="love-chain" />
+						<img className={styles.logo} src="/images/feature2.png" alt="" />
 					</div>
 					<p className={styles.text}>
 						특별한 러브체인 자물쇠들은 추가적으로<br/>
@@ -63,12 +63,15 @@ function Main() {
 				</Box>
 				<Box className={styles.item} width={[1, 1 / 2, 1 / 3]} margin={['0 0 30px', '0 0 30px', '0 20px 20px', '0 20px 20px']}>
 					<div className={styles.thumbnail}>
-						<img className={styles.logo} src="/images/feature3.png" alt="love-chain" />
+						<img className={styles.logo} src="/images/feature3.png" alt="" />
 					</div>
 					<p className={styles.text}>
 						러브체인 자물쇠는<br/>
 						기록한 정보를 바탕으로<br/>
-						공유 가능한 미니사이트를 제공합니다.
+						공유 가능한 미니사이트를 제공합니다. <br /><br />
+						<Link href='/site/89'>
+							<a className={styles.link}>&#39;지숙 💛️ 두희&#39; 미니사이트 방문하기</a>
+						</Link>
 					</p>
 				</Box>
 			</Flex>

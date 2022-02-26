@@ -24,7 +24,7 @@
 	height: 150px;
 	border-radius: 50%;
 	position:relative;
-	top:-130px;
+	top:-100px;
 	left: -20px;
 }
 
@@ -33,25 +33,156 @@
 	height: 150px;
 	border-radius: 50%;
 	position:relative;
-	top:-130px;
+	top:-100px;
 	right: -20px;
 }
 
 .couple_name {
+	margin-top:40px;
+	margin-bottom: 20px;
 	position:relative;
 	font-size: 48px;
 	color: #fff;
 }
 
 .text {
-	margin: 40px 0;
+	position: relative;
+	margin: 40px 0 20px;
 	width: 80%;
-	padding:30px;
+	padding:20px;
 	border-radius: 80px;
 	background-color: #fff;
 	color: #CB4FFE;
 	font-size: 24px;
 	white-space: pre-line;
+	&:before {
+		content: '';
+		display: inline-block;
+		position:absolute;
+		top:-30px;
+		right:20px;
+		width: 60px;
+		height: 60px;
+		background-size:cover;
+		background-image: url(/images/heart.png);
+	}
+}
+
+.date {
+	position: relative;
+	margin: 40px 0 40px;
+	width: 80%;
+	padding:20px;
+	border-radius: 80px;
+	background-color: #fff;
+	color: #CB4FFE;
+	font-size: 24px;
+	white-space: pre-line;
+	&:before {
+		content: '';
+		display: inline-block;
+		position:absolute;
+		top:-20px;
+		left:20px;
+		width: 70px;
+		height: 70px;
+		background-size:cover;
+		background-image: url(/images/spark.png);
+	}
+	&::after {
+		content: '';
+		display: inline-block;
+		position:absolute;
+		bottom:-20px;
+		right:10px;
+		width: 70px;
+		height: 70px;
+		background-size:cover;
+		background-image: url(/images/arrow.png);
+	}
+}
+
+.social_instagram {
+	display: flex;
+	justify-content: space-around;
+	span {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 10px;
+		background: #fff;
+		padding:10px 20px;
+		border-radius: 30px;
+		img {
+			width: 30px;
+			margin-right: 10px;
+		}
+	}
+}
+
+.social_twitter {
+	position: relative;
+	height: 140px;
+	color:#fff;
+	img {
+		width: 140px;
+		height: 140px;
+	}
+	.one {
+		position: absolute;
+		width: 140px;
+		top: 0;
+		left: -100px;
+		animation: mover 1.2s infinite  alternate ease-in-out;
+		span {
+			position: absolute;
+			top: 100px;
+			left: -20px;
+		}
+	}
+	.two {
+		position: absolute;
+		width: 140px;
+		top: 60px;
+		left: -20px;
+		animation: mover 1s infinite alternate ease-in-out;
+		span {
+			position: absolute;
+			top: 100px;
+			left: -20px;
+		}
+	}
+}
+
+.social_url {
+	width:80%;
+	.link {
+		display: block;
+		padding:20px;
+		border-radius: 80px;
+		background-color: #fff;
+		padding:20px;
+		margin: 20px 0;
+    color: #CB4FFE;
+		position: relative;
+		&:before {
+			content: '';
+			display: inline-block;
+			position:absolute;
+			width: 50px;
+			height: 50px;
+			background-size:cover;
+			background-image: url(/images/purple.png);
+		}
+		&:nth-child(1)::before {
+			top:-20px;
+			left:-20px;
+		}
+		&:nth-child(2)::before {
+			bottom:-20px;
+			right:-20px;
+		}
+	}
 }
 
 .couple_image {
@@ -62,6 +193,7 @@
 
 .util {
 	width: 80%;
+	margin-top: 40px;
 	margin-bottom: 60px;
 	display: flex;
 	flex-direction: column;
@@ -74,4 +206,9 @@
 		margin-top: 20px;
 		font-size: 14px;
 	}
+}
+
+@keyframes mover {
+	0% { transform: translateY(0); }
+	100% { transform: translateY(-20px); }
 }
