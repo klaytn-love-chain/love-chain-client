@@ -46,10 +46,10 @@ function MyLockList({ list }) {
   const handleSellLockSubmit = (tokenId, price) => {
     const price2 = price.toString(16).padStart(64, '0');
 
-    deleteItemUserInfo({tokenId, userAddress, requestKey});
-
     sellNft(userAddress, tokenId, price2, setQrvalue, async (result) => {
       if (result.status === 'success') {
+        deleteItemUserInfo({ tokenId, userAddress, requestKey });
+
         await toast({
           title: '자물쇠 판매 등록이 완료되었습니다',
           description: `tx_hash: ${result.tx_hash} `,
