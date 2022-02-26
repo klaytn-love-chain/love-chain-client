@@ -47,7 +47,7 @@ export default function ItemListPage() {
   }, [coupleImageFilter, dateFilter, isAvailableFilter, lockList.length, offsetFilter, priceFilter, socialProfileFilter]);
 
   useEffect(() => {
-    getMoreItems();
+    offsetFilter != 0 && getMoreItems();
   }, [offsetFilter]);
 
   useEffect(() => {
