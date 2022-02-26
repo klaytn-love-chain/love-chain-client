@@ -99,11 +99,11 @@ function MiniSite() {
 			{!info?.isPrivate && (
 				<>
 				<Head>
-					<title>러브체인 | 영원한 사랑의 약속</title>
-					<meta property="og:title" content="러브체인 | 영원한 사랑의 약속" />
+					<title>${info?.profileName.oneName} 💛️ ${info?.profileName.twoName} 영원한 사랑의 약속</title>
+					<meta property="og:title" content="${info?.profileName.oneName} 💛️ ${info?.profileName.twoName} 영원한 사랑의 약속" />
 					<meta property="og:image" content="/images/graph.png" />
-					<meta name="description" content="Klaytn 사랑의 자물쇠 NFT" />
-					<meta property="og:description" content="Klaytn 사랑의 자물쇠 NFT" />
+					<meta name="description" content="러브체인 | Klaytn 사랑의 자물쇠 NFT" />
+					<meta property="og:description" content="러브체인 | Klaytn 사랑의 자물쇠 NFT" />
 				</Head>
 					<div className={styles.container}>
 						<img className={styles.lock_image} src={info?.lockImage} alt=""/>
