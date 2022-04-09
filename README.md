@@ -6,7 +6,7 @@
 
 ![logo](https://user-images.githubusercontent.com/17515656/155762639-ebcdd35b-bf52-4196-9f12-62bd0f52c85a.png)
 
-* 공식사이트
+* 공식사이트 (현재 서버 배포 중단상태입니다)
 https://my-love-chain.vercel.app/
 
 ### Team
